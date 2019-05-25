@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,5 +21,6 @@ namespace RxTracker.Models
         public Doctor Doctor { get; set; }
         public Drug Drug { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
+        public virtual IdentityUser IdentityUser { get; set; }
     }
 }

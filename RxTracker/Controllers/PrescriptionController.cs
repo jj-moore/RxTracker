@@ -1,14 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RxTracker.Data;
+using RxTracker.ViewModels;
+using RxTracker.ViewModels.Prescription;
+using System.Linq;
 
 namespace RxTracker.Controllers
 {
+    [Authorize]
     public class PrescriptionController : Controller
     {
+        private readonly MyContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public PrescriptionController(MyContext context, UserManager<IdentityUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+
         // GET: Prescription
         public ActionResult Index()
         {
@@ -47,19 +59,49 @@ namespace RxTracker.Controllers
         // GET: Prescription/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            EditViewModel model = new EditViewModel
+            {
+                Prescription = _context.Prescription.Find(id),
+                Doctors = _context.Doctor.Select(d => new SelectHelper
+                {
+                    Value = d.DoctorId,
+                    Text = d.Name
+                })
+               .ToList(),
+                Drugs = _context.Drug.Select(d => new SelectHelper
+                {
+                    Value = d.DrugId,
+                    Text = string.IsNullOrEmpty(d.TradeName) ? d.Name : d.TradeName
+                })
+               .ToList(),
+            };
+
+            return View(model);
         }
 
         // POST: Prescription/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Models.Prescription prescription)
         {
             try
             {
-                // TODO: Add update logic here
+                var prescriptionToEdit = _context.Prescription.Find(prescription.PrescriptionId);
+                if (prescriptionToEdit == null)
+                    return StatusCode(400);
 
-                return RedirectToAction(nameof(Index));
+                prescriptionToEdit.DoctorId = prescription.DoctorId;
+                prescriptionToEdit.DrugId = prescription.DrugId;
+                prescriptionToEdit.Active = prescription.Active;
+                prescriptionToEdit.Form = prescription.Form;
+                prescriptionToEdit.Dosage = prescription.Dosage;
+                prescriptionToEdit.Regimen = prescription.Regimen;
+
+                IdentityUser currentUser =_userManager.FindByNameAsync(this.User.Identity.Name).Result;
+                prescriptionToEdit.IdentityUser = currentUser;
+
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Edit));
             }
             catch
             {

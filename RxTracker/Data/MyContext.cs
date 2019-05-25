@@ -84,7 +84,7 @@ namespace RxTracker.Data
             builder.Entity<Prescription>(entity =>
             {
                 entity.HasKey(p => p.PrescriptionId);
-
+               
                 entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.Prescriptions)
                     .HasForeignKey(d => d.DoctorId);
@@ -99,7 +99,7 @@ namespace RxTracker.Data
 
                 entity.Property(e => e.Active)
                     .HasColumnType("tinyint");
-                
+
                 entity.Property(e => e.Form)
                     .HasMaxLength(80);
                 entity.Property(e => e.Dosage)
@@ -111,7 +111,7 @@ namespace RxTracker.Data
             builder.Entity<Transaction>(entity =>
             {
                 entity.HasKey(p => p.TransactionId);
-                
+
                 entity.HasOne(d => d.Prescription)
                     .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.PrescriptionId);
@@ -119,7 +119,7 @@ namespace RxTracker.Data
                 entity.HasOne(d => d.Pharmacy)
                     .WithMany(p => p.Transactions)
                     .HasForeignKey(d => d.PharmacyId);
-                
+
                 entity.Property(e => e.DateFilled)
                     .HasColumnType("datetime");
 
