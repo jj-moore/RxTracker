@@ -1,0 +1,29 @@
+﻿@model DashboardViewModel
+
+<div class="container">
+  <h2 class="text-center mt-5">Welcome!</h2>
+  <p class="mt-5 text-center">Here are the details for last refill of each drug!</p>
+  <table class="table table-hover table-sm mt-1">
+    <thead>
+      <tr>
+        <th>Drug</th>
+        <th>Doctor</th>
+        <th>Pharmacy</th>
+        <th>Last Filled</th>
+        <th>Last Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var record in Model.Dashboard)
+      {
+        <tr>
+          <td>@record.DrugName</td>
+          <td>@record.DoctorName</td>
+          <td>@record.PharmacyName</td>
+          <td>@record.LastFilled</td>
+          <td>@record.LastCost</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

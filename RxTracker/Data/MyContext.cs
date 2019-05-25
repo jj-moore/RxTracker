@@ -15,7 +15,7 @@ namespace RxTracker.Data
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Pharmacy> Pharmacy { get; set; }
         public DbSet<Prescription> Prescription { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -124,7 +124,7 @@ namespace RxTracker.Data
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.Cost)
-                    .HasColumnType("decimal");
+                    .HasColumnType("decimal(10,2)");
                 entity.Property(e => e.InsuranceUsed)
                     .HasMaxLength(80);
                 entity.Property(e => e.DiscountUsed)
