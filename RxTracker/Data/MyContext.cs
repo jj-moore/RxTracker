@@ -97,7 +97,8 @@ namespace RxTracker.Data
                     .WithMany(p => p.Prescriptions)
                     .HasForeignKey(d => d.PatientId);
 
-                entity.Property(e => e.Active);
+                entity.Property(e => e.Active)
+                    .HasColumnType("tinyint");
                 
                 entity.Property(e => e.Form)
                     .HasMaxLength(80);
@@ -129,6 +130,8 @@ namespace RxTracker.Data
                 entity.Property(e => e.DiscountUsed)
                     .HasMaxLength(80);
             });
+
+            builder.Seed();
         }
     }
 }

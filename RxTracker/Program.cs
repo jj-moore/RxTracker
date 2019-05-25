@@ -19,6 +19,10 @@ namespace RxTracker
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((builderContext, config) =>
+                {
+                    config.AddJsonFile("secrets.json", optional: false, reloadOnChange: true);
+                })
                 .UseStartup<Startup>();
     }
 }
