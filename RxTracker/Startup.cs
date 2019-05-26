@@ -44,10 +44,6 @@ namespace RxTracker
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddDbContext<MyContext>(options =>
-                options.UseMySQL(
-                    Configuration.GetConnectionString("MyContext")));
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
