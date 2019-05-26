@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RxTracker.Data;
 
 namespace RxTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190526161436_AddCustomTables")]
+    partial class AddCustomTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,28 +205,6 @@ namespace RxTracker.Data.Migrations
                     b.HasKey("DoctorId");
 
                     b.ToTable("Doctor");
-
-                    b.HasData(
-                        new
-                        {
-                            DoctorId = 1,
-                            Address = "East Ann Arbor",
-                            Hospital = "University Hospital",
-                            Name = "Bob Pharma"
-                        },
-                        new
-                        {
-                            DoctorId = 2,
-                            Address = "Traverse City, MI",
-                            Hospital = "VA Hospital",
-                            Name = "Jane Cuts"
-                        },
-                        new
-                        {
-                            DoctorId = 3,
-                            Address = "Hell, MI",
-                            Name = "Dr. Strangelove"
-                        });
                 });
 
             modelBuilder.Entity("RxTracker.Models.Drug", b =>
@@ -250,41 +230,6 @@ namespace RxTracker.Data.Migrations
                     b.HasIndex("GenericForId");
 
                     b.ToTable("Drug");
-
-                    b.HasData(
-                        new
-                        {
-                            DrugId = 1,
-                            Manufacturer = "Pfizer",
-                            Name = "Atorvastatin",
-                            TradeName = "Lipitor"
-                        },
-                        new
-                        {
-                            DrugId = 2,
-                            GenericForId = 1,
-                            Name = "Atorvastatin"
-                        },
-                        new
-                        {
-                            DrugId = 3,
-                            Manufacturer = "Reckitt Benckiser",
-                            Name = "Buprenorphine/naloxone",
-                            TradeName = "Suboxone"
-                        },
-                        new
-                        {
-                            DrugId = 4,
-                            Manufacturer = "Pfizer",
-                            Name = "Pregabalin",
-                            TradeName = "Lyrica"
-                        },
-                        new
-                        {
-                            DrugId = 5,
-                            GenericForId = 3,
-                            Name = "Buprenorphine/naloxone"
-                        });
                 });
 
             modelBuilder.Entity("RxTracker.Models.Patient", b =>
@@ -314,26 +259,6 @@ namespace RxTracker.Data.Migrations
                     b.HasKey("PatientId");
 
                     b.ToTable("Patient");
-
-                    b.HasData(
-                        new
-                        {
-                            PatientId = 1,
-                            DateOfBirth = new DateTime(1965, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mary@example.com",
-                            FirstName = "Mary",
-                            LastName = "Smith",
-                            PhoneNumber = "5556567890"
-                        },
-                        new
-                        {
-                            PatientId = 2,
-                            DateOfBirth = new DateTime(1950, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mickey@example.com",
-                            FirstName = "Mickey",
-                            LastName = "Mouse",
-                            PhoneNumber = "1237894560"
-                        });
                 });
 
             modelBuilder.Entity("RxTracker.Models.Pharmacy", b =>
@@ -352,26 +277,6 @@ namespace RxTracker.Data.Migrations
                     b.HasKey("PharmacyId");
 
                     b.ToTable("Pharmacy");
-
-                    b.HasData(
-                        new
-                        {
-                            PharmacyId = 1,
-                            Address = "Carpenter Rd, Ypsilanti",
-                            Name = "Meijer"
-                        },
-                        new
-                        {
-                            PharmacyId = 2,
-                            Address = "Mail Order",
-                            Name = "CVS Caremark"
-                        },
-                        new
-                        {
-                            PharmacyId = 3,
-                            Address = "Whittaker Rd, Ypsilanti, MI",
-                            Name = "CVS"
-                        });
                 });
 
             modelBuilder.Entity("RxTracker.Models.Prescription", b =>
@@ -411,63 +316,6 @@ namespace RxTracker.Data.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("Prescription");
-
-                    b.HasData(
-                        new
-                        {
-                            PrescriptionId = 1,
-                            Active = (byte)1,
-                            DoctorId = 1,
-                            Dosage = "10mg/12.5mg",
-                            DrugId = 2,
-                            Form = "Sublingual Strip",
-                            PatientId = 2,
-                            Regimen = "Half strip, twice daily"
-                        },
-                        new
-                        {
-                            PrescriptionId = 2,
-                            Active = (byte)1,
-                            DoctorId = 3,
-                            Dosage = "60mg",
-                            DrugId = 4,
-                            Form = "Tablet",
-                            PatientId = 1,
-                            Regimen = "Once daily"
-                        },
-                        new
-                        {
-                            PrescriptionId = 3,
-                            Active = (byte)1,
-                            DoctorId = 3,
-                            Dosage = "15mg/20mg",
-                            DrugId = 5,
-                            Form = "Tablet",
-                            PatientId = 1,
-                            Regimen = "Two tablets daily, morning and evening"
-                        },
-                        new
-                        {
-                            PrescriptionId = 4,
-                            Active = (byte)1,
-                            DoctorId = 2,
-                            Dosage = "100mg",
-                            DrugId = 2,
-                            Form = "Tablet",
-                            PatientId = 1,
-                            Regimen = "Once daily"
-                        },
-                        new
-                        {
-                            PrescriptionId = 5,
-                            Active = (byte)0,
-                            DoctorId = 1,
-                            Dosage = "100mg",
-                            DrugId = 1,
-                            Form = "Capsule",
-                            PatientId = 2,
-                            Regimen = "Once daily"
-                        });
                 });
 
             modelBuilder.Entity("RxTracker.Models.Transaction", b =>
@@ -499,101 +347,6 @@ namespace RxTracker.Data.Migrations
                     b.HasIndex("PrescriptionId");
 
                     b.ToTable("Transaction");
-
-                    b.HasData(
-                        new
-                        {
-                            TransactionId = 1,
-                            Cost = 20m,
-                            DateFilled = new DateTime(2019, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "BCBS",
-                            PharmacyId = 2,
-                            PrescriptionId = 1
-                        },
-                        new
-                        {
-                            TransactionId = 2,
-                            Cost = 25m,
-                            DateFilled = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "BCBS",
-                            PharmacyId = 3,
-                            PrescriptionId = 1
-                        },
-                        new
-                        {
-                            TransactionId = 3,
-                            Cost = 20m,
-                            DateFilled = new DateTime(2019, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "BCBS",
-                            PharmacyId = 2,
-                            PrescriptionId = 1
-                        },
-                        new
-                        {
-                            TransactionId = 4,
-                            Cost = 50m,
-                            DateFilled = new DateTime(2018, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "GoodRx",
-                            InsuranceUsed = "Aetna",
-                            PharmacyId = 1,
-                            PrescriptionId = 5
-                        },
-                        new
-                        {
-                            TransactionId = 5,
-                            Cost = 32.99m,
-                            DateFilled = new DateTime(2019, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "Manufacturer's Coupon",
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 1,
-                            PrescriptionId = 2
-                        },
-                        new
-                        {
-                            TransactionId = 6,
-                            Cost = 30.65m,
-                            DateFilled = new DateTime(2019, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "Manufacturer's Coupon",
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 1,
-                            PrescriptionId = 2
-                        },
-                        new
-                        {
-                            TransactionId = 7,
-                            Cost = 41.82m,
-                            DateFilled = new DateTime(2019, 4, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 3,
-                            PrescriptionId = 3
-                        },
-                        new
-                        {
-                            TransactionId = 8,
-                            Cost = 26.62m,
-                            DateFilled = new DateTime(2019, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 2,
-                            PrescriptionId = 3
-                        },
-                        new
-                        {
-                            TransactionId = 9,
-                            Cost = 12.55m,
-                            DateFilled = new DateTime(2019, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "GoodRx Gold",
-                            PharmacyId = 2,
-                            PrescriptionId = 4
-                        },
-                        new
-                        {
-                            TransactionId = 10,
-                            Cost = 9.82m,
-                            DateFilled = new DateTime(2019, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 1,
-                            PrescriptionId = 4
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

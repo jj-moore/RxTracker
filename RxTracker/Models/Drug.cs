@@ -12,7 +12,7 @@ namespace RxTracker.Models
         public string Name { get; set; }
         public string TradeName { get; set; }
         public string Manufacturer { get; set; }
-        public int GenericForId { get; set; }
+        public int? GenericForId { get; set; }
 
         public Drug GenericFor { get; set; }
         public ICollection<Prescription> Prescriptions { get; set; }
