@@ -13,6 +13,11 @@ namespace RxTracker.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(ApplicationDbContext context)
+        {
+            context.Database.Migrate();
+        }
+
         public IActionResult Index()
         {
             return View();

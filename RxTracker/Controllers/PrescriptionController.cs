@@ -12,10 +12,10 @@ namespace RxTracker.Controllers
     [Authorize]
     public class PrescriptionController : Controller
     {
-        private readonly MyContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public PrescriptionController(MyContext context, UserManager<IdentityUser> userManager)
+        public PrescriptionController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

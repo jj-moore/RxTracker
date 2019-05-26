@@ -10,9 +10,9 @@ namespace RxTracker.Controllers
     [Authorize]
     public class DashboardController : Controller
     {
-        private readonly MyContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DashboardController(MyContext context)
+        public DashboardController(ApplicationDbContext context)
         {
             _context = context;
         }
