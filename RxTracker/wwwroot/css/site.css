@@ -2,3 +2,52 @@
     height: 100vw;
     background-image: linear-gradient(to bottom right, lightskyblue, ghostwhite);
 }
+
+/**********************
+    DROPDOWN LINKS
+**********************/
+.my-dropdown {
+    display: none;
+    z-index: 100;
+    position: absolute;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    font-weight: normal;
+}
+
+a:hover + .my-dropdown {
+    display: block;
+}
+
+.my-dropdown:hover {
+    display: block;
+}
+
+.my-dropdown-item {
+    display: block;
+    cursor: default;
+    padding-left: 0.5rem;
+    padding-bottom: 2px;
+    border-radius: 0.25rem;
+    color: #333;
+}
+
+.function-links {
+    color: blue !important;
+    cursor: pointer;
+}
+
+.optGroup {
+    display: block;
+    cursor: default;
+    font-weight: 600;
+    text-decoration: underline;
+    margin-bottom: 0.25rem;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.my-dropdown a:hover {
+    background-color: #eee;
+    text-decoration: none;
+}

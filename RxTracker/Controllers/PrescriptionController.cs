@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
 using RxTracker.ViewModels;
 using RxTracker.ViewModels.Prescription;
@@ -24,7 +25,19 @@ namespace RxTracker.Controllers
         // GET: Prescription
         public ActionResult Index()
         {
-            return View();
+            ListViewModel model = new ListViewModel
+            {
+                PrescriptionList = _context.Prescription
+                .Where(p => p.Active)
+                .Include(p => p.Drug)
+                .Select(p => new PrescriptionList
+                {
+                    PrescriptionId = p.PrescriptionId,
+                    DrugName = p.Drug.Name,
+                    TradeName = p.Drug.TradeName
+                }).ToList()
+            };
+            return View(model);
         }
 
         // GET: Prescription/Details/5

@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener('DOMContentLoaded', () => {
+  const listBody = document.getElementById('listBody');
+  if (listBody) {
+    const rows = listBody.querySelectorAll('tr');
+    rows.forEach(row => {
+      row.addEventListener('click', e => {
+        const targetId = e.target.parentElement.dataset.id;
+        console.log(targetId);
+      })
+    });
+  }
 
-// Write your JavaScript code.
+});
