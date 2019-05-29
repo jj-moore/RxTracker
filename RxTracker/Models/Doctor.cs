@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace RxTracker.Models
         public string Name { get; set; }
         public string Hospital { get; set; }
         public string Address { get; set; }
+        public virtual IdentityUser IdentityUser { get; set; }
 
         public ICollection<Prescription> Prescriptions { get; set; }
     }

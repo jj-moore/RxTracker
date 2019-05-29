@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
+using RxTracker.Models;
 using RxTracker.ViewModels;
 using RxTracker.ViewModels.Prescription;
 using System.Linq;
@@ -43,7 +44,30 @@ namespace RxTracker.Controllers
         // GET: Prescription/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Prescription prescription = _context.Prescription.Find(id);
+            if (prescription == null)
+            {
+                return NoContent();
+            }
+
+            EditViewModel model = new EditViewModel
+            {
+                Prescription = prescription,
+                Doctors = _context.Doctor.Select(d => new SelectHelper
+                {
+                    Value = d.DoctorId,
+                    Text = d.Name
+                })
+               .ToList(),
+                Drugs = _context.Drug.Select(d => new SelectHelper
+                {
+                    Value = d.DrugId,
+                    Text = string.IsNullOrEmpty(d.TradeName) ? d.Name : d.TradeName
+                })
+               .ToList(),
+            };
+
+            return PartialView("_PrescriptionPartial", model);
         }
 
         // GET: Prescription/Create

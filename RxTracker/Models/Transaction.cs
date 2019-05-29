@@ -10,8 +10,8 @@ namespace RxTracker.Models
         public int TransactionId { get; set; }
         public int PrescriptionId { get; set; }
         public int PharmacyId { get; set; }
-        public DateTime DateFilled { get; set; }
-        public decimal Cost { get; set; }
+        public DateTime? DateFilled { get; set; }
+        public decimal? Cost { get; set; }
         public string InsuranceUsed { get; set; }
         public string DiscountUsed { get; set; }
 

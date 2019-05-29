@@ -12,7 +12,7 @@ namespace RxTracker.Models
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
         public int DrugId { get; set; }
-        public bool Active { get; set; }
+        public bool Active { get; set; } = true;
         public string Form { get; set; }
         public string Dosage { get; set; }
         public string Regimen { get; set; }
