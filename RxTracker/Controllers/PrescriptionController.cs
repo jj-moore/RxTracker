@@ -31,7 +31,7 @@ namespace RxTracker.Controllers
                 PrescriptionList = _context.Prescription
                 .Where(p => p.Active)
                 .Include(p => p.Drug)
-                .Select(p => new PrescriptionList
+                .Select(p => new PrescriptionListItem
                 {
                     PrescriptionId = p.PrescriptionId,
                     DrugName = p.Drug.Name,

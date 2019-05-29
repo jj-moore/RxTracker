@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RxTracker.ViewModels.Prescription
 {
-    public class PrescriptionList
+    public class PrescriptionListItem
     {
         public int PrescriptionId { get; set; }
         public string DrugName { get; set; }
@@ -14,6 +14,6 @@ namespace RxTracker.ViewModels.Prescription
 
     public class ListViewModel
     {
-        public List<PrescriptionList> PrescriptionList { get; set; }
+        public List<PrescriptionListItem> PrescriptionList { get; set; }
     }
 }

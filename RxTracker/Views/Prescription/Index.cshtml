@@ -1,6 +1,7 @@
 ﻿@model  ListViewModel
 
   <div class="container">
+    <input type="hidden" id="View" value="Prescription" />
     <div class="row">
       <div class="col-5">
         <table class="table table-sm table-striped table-hover table-responsive">
@@ -11,7 +12,7 @@
             </tr>
           </thead>
           <tbody id="listBody">
-            @foreach(var prescription in Model.PrescriptionList)
+            @foreach (var prescription in Model.PrescriptionList)
             {
               <tr data-id="@prescription.PrescriptionId">
                 <td>@prescription.DrugName</td>

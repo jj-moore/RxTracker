@@ -5,15 +5,16 @@
     rows.forEach(row => {
       row.addEventListener('click', e => {
         const targetId = e.target.parentElement.dataset.id;
-          getPrescriptionPartial(targetId);
+          getPartialView(targetId);
       })
     });
   }
 
 });
 
-function getPrescriptionPartial(prescriptionId) {
-    const url = `/Prescription/Details?id=${prescriptionId}`;
+function getPartialView(targetId) {
+    const controller = document.getElementById('View').value;
+    const url = `/${controller}/Details?id=${targetId}`;
     fetch(url)
         .then(response => response.text())
         .then(text => {
