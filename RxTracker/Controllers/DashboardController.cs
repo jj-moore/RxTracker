@@ -43,8 +43,8 @@ namespace RxTracker.Controllers
                         transaction.Prescription.Drug.Name : transaction.Prescription.Drug.TradeName,
                     DoctorName = transaction.Prescription.Doctor.Name,
                     PharmacyName = transaction.Pharmacy.Name,
-                    LastFilled = transaction.DateFilled.ToShortDateString(),
-                    LastCost = transaction.Cost.ToString("C")
+                    LastFilled = transaction.DateFilled?.ToShortDateString(),
+                    LastCost = transaction.Cost?.ToString("C")
                 });
             }
             return View(model);

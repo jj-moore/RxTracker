@@ -15,9 +15,9 @@ namespace RxTracker.Controllers
     public class PrescriptionController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<MyUser> _userManager;
 
-        public PrescriptionController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public PrescriptionController(ApplicationDbContext context, UserManager<MyUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -134,8 +134,8 @@ namespace RxTracker.Controllers
                 prescriptionToEdit.Dosage = prescription.Dosage;
                 prescriptionToEdit.Regimen = prescription.Regimen;
 
-                IdentityUser currentUser =_userManager.FindByNameAsync(this.User.Identity.Name).Result;
-                prescriptionToEdit.IdentityUser = currentUser;
+                MyUser currentUser = _userManager.FindByNameAsync(this.User.Identity.Name).Result;
+                prescriptionToEdit.User = currentUser;
 
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Edit));

@@ -14,7 +14,7 @@ namespace RxTracker.Models
         public string TradeName { get; set; }
         public string Manufacturer { get; set; }
         public int? GenericForId { get; set; }
-        public virtual IdentityUser IdentityUser { get; set; }
+        public virtual MyUser User { get; set; }
 
 
         public Drug GenericFor { get; set; }

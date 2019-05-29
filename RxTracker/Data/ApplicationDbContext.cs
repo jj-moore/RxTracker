@@ -7,13 +7,14 @@ using RxTracker.Models;
 
 namespace RxTracker.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<MyUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
 
         }
+
 
         public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Drug> Drug { get; set; }

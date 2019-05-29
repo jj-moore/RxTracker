@@ -21,6 +21,6 @@ namespace RxTracker.Models
         public Doctor Doctor { get; set; }
         public Drug Drug { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
-        public virtual IdentityUser IdentityUser { get; set; }
+        public virtual MyUser User { get; set; }
     }
 }

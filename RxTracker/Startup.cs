@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RxTracker.Data;
+using RxTracker.Models;
 
 namespace RxTracker
 {
@@ -33,7 +34,7 @@ namespace RxTracker
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<MyUser>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireUppercase = false;
