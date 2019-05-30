@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
 using RxTracker.Models;
 using RxTracker.ViewModels;
@@ -48,7 +49,7 @@ namespace RxTracker.Controllers
             Drug drug = _context.Drug.Find(id);
             if (drug == null)
             {
-                return NoContent();
+                drug = new Drug();
             }
             DetailViewModel model = new DetailViewModel
             {
@@ -65,86 +66,72 @@ namespace RxTracker.Controllers
             return PartialView("_DrugPartial", model);
         }
 
-        // GET: Drug/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Drug/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Drug/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Drug/Edit/5
+        // POST: Drug/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Drug drug)
         {
+            if (drug.DrugId == 0)
+            {
+                _context.Drug.Add(drug);
+            }
+            else
+            {
+                EditDrug(drug);
+            }
+
             try
             {
-                Drug drugToEdit = _context.Drug.Find(drug.DrugId);
-                if (drugToEdit == null)
-                {
-                    return View();
-                }
-
-                drugToEdit.Name = drug.Name;
-                drugToEdit.TradeName = drug.TradeName;
-                drugToEdit.Manufacturer = drug.Manufacturer;
-                drugToEdit.GenericForId = drug.GenericForId;
-
-                MyUser currentUser = _userManager.FindByNameAsync(this.User.Identity.Name).Result;
-                drugToEdit.User = currentUser;
-
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (DbUpdateException)
             {
-                return View();
-            }
-        }
 
-        // GET: Drug/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            }
+
+            return RedirectToAction(nameof(Index));
+
         }
 
         // POST: Drug/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromBody]int id)
         {
+            Drug drugToDelete = _context.Drug.Find(id);
+            if (drugToDelete == null)
+            {
+                return NoContent();
+            }
+
+            _context.Drug.Remove(drugToDelete);
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
             }
-            catch
+            catch (DbUpdateException)
             {
-                return View();
+                return StatusCode(500);
             }
+
+            return Ok();
+        }
+
+        private bool EditDrug(Drug drug)
+        {
+            Drug drugToEdit = _context.Drug.Find(drug.DrugId);
+            if (drugToEdit == null)
+            {
+                return false;
+            }
+
+            drugToEdit.Name = drug.Name;
+            drugToEdit.TradeName = drug.TradeName;
+            drugToEdit.Manufacturer = drug.Manufacturer;
+            drugToEdit.GenericForId = drug.GenericForId;
+
+            MyUser currentUser = _userManager.FindByNameAsync(this.User.Identity.Name).Result;
+            drugToEdit.User = currentUser;
+            return true;
         }
     }
 }
