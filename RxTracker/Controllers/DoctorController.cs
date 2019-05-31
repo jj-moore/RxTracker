@@ -3,91 +3,122 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RxTracker.Data;
+using RxTracker.Models;
+using RxTracker.ViewModels;
 
 namespace RxTracker.Controllers
 {
     public class DoctorController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<MyUser> _userManager;
+
+        public DoctorController(ApplicationDbContext context, UserManager<MyUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+
         // GET: Doctor
         public ActionResult Index()
         {
-            return View();
+
+            var model = new ViewModels.Doctor.ListViewModel
+            {
+                DoctorList = _context.Doctor
+                .Select(d => new ViewModels.Doctor.DoctorListItem
+                {
+                    Hospital = d.Hospital,
+                    DoctorId = d.DoctorId,
+                    Name = d.Name
+                })
+                .ToList()
+            };
+
+            return View(model);
         }
 
         // GET: Doctor/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
-
-        // GET: Doctor/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Doctor/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            Doctor doctor = _context.Doctor.Find(id);
+            if(doctor == null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                doctor = new Doctor();
             }
-            catch
-            {
-                return View();
-            }
+            return PartialView("_DoctorPartial", doctor);
         }
-
-        // GET: Doctor/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
+          
         // POST: Doctor/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Doctor doctor)
         {
+
+            if (doctor.DoctorId == 0)
+            {
+                _context.Doctor.Add(doctor);
+            }
+            else
+            {
+                EditDoctor(doctor);
+            }
+
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
             }
-            catch
+            catch (DbUpdateException)
             {
-                return View();
-            }
-        }
 
-        // GET: Doctor/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Doctor/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Delete([FromBody]int id)
         {
+            Doctor doctorToDelete = _context.Doctor.Find(id);
+            if (doctorToDelete == null)
+            {
+                return NoContent();
+            }
+
+            _context.Doctor.Remove(doctorToDelete);
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
             }
-            catch
+            catch (DbUpdateException)
             {
-                return View();
+                return StatusCode(500);
             }
+
+            return Ok();
+        }
+
+        private bool EditDoctor(Doctor doctor)
+        {
+            Doctor doctorToEdit = _context.Doctor.Find(doctor.DoctorId);
+            if (doctorToEdit == null)
+            {
+                return false;
+            }
+
+            doctorToEdit.Name = doctor.Name;
+            doctorToEdit.Hospital = doctor.Hospital;
+            doctorToEdit.Address = doctor.Address;
+
+            MyUser currentUser = _userManager.FindByNameAsync(this.User.Identity.Name).Result;
+            doctorToEdit.User = currentUser;
+            return true;
         }
     }
 }

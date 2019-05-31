@@ -1,0 +1,28 @@
+﻿@model RxTracker.ViewModels.Doctor.ListViewModel
+
+<div class="container">
+  <input type="hidden" id="View" value="Doctor" />
+  <button type="button" id="btnCreate" class="btn btn-primary">Add New Doctor</button>
+  <div class="row">
+    <div class="col-5">
+      <table class="table table-sm table-striped table-hover table-responsive">
+        <thead>
+          <tr>
+            <th>Hospital</th>
+            <th>Doctor</th>
+          </tr>
+        </thead>
+        <tbody id="listBody">
+          @foreach (var drug in Model.DoctorList)
+          {
+          <tr data-id="@drug.DoctorId">
+            <td>@drug.Hospital</td>
+            <td>@drug.Name</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div id="partialView" class="col-7"></div>
+  </div>
+</div>

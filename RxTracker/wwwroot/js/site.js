@@ -13,8 +13,6 @@
     document.getElementById('btnCreate').addEventListener('click', () => {
         getPartialView(0);
     });
-
-
 });
 
 function getPartialView(targetId) {
@@ -38,6 +36,7 @@ function deleteRecord() {
     const data = document.getElementById('recordId').value
     const controller = document.getElementById('View').value;
     const url = `/${controller}/Delete`;
+    console.log(url);
     fetch(url, {
         method: 'POST',
         headers: {
@@ -54,8 +53,4 @@ function deleteRecord() {
         .catch(error => {
             console.error(error);
         });
-}
-
-function updateList() {
-    
 }
