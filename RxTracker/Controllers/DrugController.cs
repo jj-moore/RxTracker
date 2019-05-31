@@ -27,9 +27,11 @@ namespace RxTracker.Controllers
         // GET: Drug
         public ActionResult Index()
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             ListViewModel model = new ListViewModel
             {
                 DrugList = _context.Drug
+                    .Where(d => d.User == user)
                     .Select(d => new DrugListItem
                     {
                         DrugId = d.DrugId,
@@ -39,30 +41,42 @@ namespace RxTracker.Controllers
                     .OrderBy(d => d.Name)
                     .ToList()
             };
-
             return View(model);
         }
 
         // GET: Drug/Details/5
         public ActionResult Details(int id)
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             Drug drug = _context.Drug.Find(id);
+            if (drug != null && drug.User != user)
+            {
+                return Unauthorized();
+            }
+
             if (drug == null)
             {
                 drug = new Drug();
             }
+
             DetailViewModel model = new DetailViewModel
             {
                 Drug = drug,
                 GenericFor = _context.Drug
+                    .Where(d => d.User == user && !string.IsNullOrEmpty(d.TradeName))
                     .Select(d => new SelectHelper
                     {
                         Value = d.DrugId,
-                        Text = string.IsNullOrEmpty(d.TradeName) ? d.Name : d.TradeName
+                        Text = d.TradeName
                     })
                     .OrderBy(d => d.Text)
                     .ToList()
             };
+            model.GenericFor.Insert(0, new SelectHelper
+            {
+                Value = 0,
+                Text = ""
+            });
             return PartialView("_DrugPartial", model);
         }
 
@@ -71,13 +85,15 @@ namespace RxTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Drug drug)
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (drug.DrugId == 0)
             {
+                drug.User = user;
                 _context.Drug.Add(drug);
             }
             else
             {
-                EditDrug(drug);
+                EditDrug(drug, user);
             }
 
             try
@@ -116,10 +132,10 @@ namespace RxTracker.Controllers
             return Ok();
         }
 
-        private bool EditDrug(Drug drug)
+        private bool EditDrug(Drug drug, MyUser user)
         {
             Drug drugToEdit = _context.Drug.Find(drug.DrugId);
-            if (drugToEdit == null)
+            if (drugToEdit == null || drugToEdit.User != user)
             {
                 return false;
             }
@@ -127,10 +143,7 @@ namespace RxTracker.Controllers
             drugToEdit.Name = drug.Name;
             drugToEdit.TradeName = drug.TradeName;
             drugToEdit.Manufacturer = drug.Manufacturer;
-            drugToEdit.GenericForId = drug.GenericForId;
-
-            MyUser currentUser = _userManager.FindByNameAsync(this.User.Identity.Name).Result;
-            drugToEdit.User = currentUser;
+            drugToEdit.GenericForId = drug.GenericForId == 0 ? null : drug.GenericForId;
             return true;
         }
     }

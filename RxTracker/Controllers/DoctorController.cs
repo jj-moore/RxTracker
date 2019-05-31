@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using RxTracker.ViewModels;
 
 namespace RxTracker.Controllers
 {
+    [Authorize]
     public class DoctorController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,10 +28,11 @@ namespace RxTracker.Controllers
         // GET: Doctor
         public ActionResult Index()
         {
-
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var model = new ViewModels.Doctor.ListViewModel
             {
                 DoctorList = _context.Doctor
+                .Where(d => d.User == user)
                 .Select(d => new ViewModels.Doctor.DoctorListItem
                 {
                     Hospital = d.Hospital,
@@ -45,27 +48,33 @@ namespace RxTracker.Controllers
         // GET: Doctor/Details/5
         public ActionResult Details(int id)
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             Doctor doctor = _context.Doctor.Find(id);
-            if(doctor == null)
+            if (doctor != null && doctor.User != user)
+            {
+                return Unauthorized();
+            }
+            if (doctor == null)
             {
                 doctor = new Doctor();
             }
             return PartialView("_DoctorPartial", doctor);
         }
-          
+
         // POST: Doctor/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Doctor doctor)
         {
-
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (doctor.DoctorId == 0)
             {
+                doctor.User = user;
                 _context.Doctor.Add(doctor);
             }
             else
             {
-                EditDoctor(doctor);
+                EditDoctor(doctor, user);
             }
 
             try
@@ -82,7 +91,6 @@ namespace RxTracker.Controllers
 
         // POST: Doctor/Delete/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Delete([FromBody]int id)
         {
             Doctor doctorToDelete = _context.Doctor.Find(id);
@@ -104,10 +112,10 @@ namespace RxTracker.Controllers
             return Ok();
         }
 
-        private bool EditDoctor(Doctor doctor)
+        private bool EditDoctor(Doctor doctor, MyUser user)
         {
             Doctor doctorToEdit = _context.Doctor.Find(doctor.DoctorId);
-            if (doctorToEdit == null)
+            if (doctorToEdit == null || doctorToEdit.User != user)
             {
                 return false;
             }
@@ -115,9 +123,6 @@ namespace RxTracker.Controllers
             doctorToEdit.Name = doctor.Name;
             doctorToEdit.Hospital = doctor.Hospital;
             doctorToEdit.Address = doctor.Address;
-
-            MyUser currentUser = _userManager.FindByNameAsync(this.User.Identity.Name).Result;
-            doctorToEdit.User = currentUser;
             return true;
         }
     }
