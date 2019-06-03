@@ -10,6 +10,15 @@ namespace RxTracker.ViewModels.Drug
         public int DrugId { get; set; }
         public string Name { get; set; }
         public string TradeName { get; set; }
+        public string DisplayName
+        {
+            get
+            {
+                return string.IsNullOrEmpty(TradeName) ?
+                    Name :
+                    $"{TradeName} ({Name})";
+            }
+        }
     }
 
     public class ListViewModel

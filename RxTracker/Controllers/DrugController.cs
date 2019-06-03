@@ -87,7 +87,6 @@ namespace RxTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Drug drug)
         {
-
             drug.GenericForId = drug.GenericForId == 0 ? null : drug.GenericForId;
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (drug.DrugId == 0)

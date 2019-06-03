@@ -9,15 +9,13 @@
         <thead>
           <tr>
             <th>Drug</th>
-            <th>Trade Name</th>
           </tr>
         </thead>
         <tbody id="listBody">
           @foreach (var drug in Model.DrugList)
           {
             <tr data-id="@drug.DrugId">
-              <td>@drug.Name</td>
-              <td>@drug.TradeName</td>
+              <td>@drug.DisplayName</td>
             </tr>
           }
         </tbody>

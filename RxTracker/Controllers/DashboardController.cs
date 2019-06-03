@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
+using RxTracker.Models;
 using RxTracker.ViewModels;
 using System.Linq;
 
@@ -11,39 +13,47 @@ namespace RxTracker.Controllers
     public class DashboardController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<MyUser> _userManager;
 
-        public DashboardController(ApplicationDbContext context)
+        public DashboardController(ApplicationDbContext context, UserManager<MyUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var groups = _context.Transaction
                  .Include(t => t.Pharmacy)
                  .Include(t => t.Prescription)
                      .ThenInclude(p => p.Doctor)
                  .Include(t => t.Prescription)
                      .ThenInclude(p => p.Drug)
-                 .GroupBy(p => p.Prescription.DrugId);
+                 .Where(t => t.Prescription.User == user)
+                 .GroupBy(p => p.Prescription.DrugId)
+                 .AsNoTracking();
 
             DashboardViewModel model = new DashboardViewModel();
 
             foreach (var group in groups)
             {
-                RxTracker.Models.Transaction transaction = group
+                Transaction transaction = group
                     .OrderByDescending(t => t.DateFilled)
                     .FirstOrDefault();
 
-                model.Dashboard.Add(new DashboardRecord
+                if (transaction != null)
                 {
-                    DrugName = string.IsNullOrEmpty(transaction.Prescription.Drug.TradeName) ?
-                        transaction.Prescription.Drug.Name : transaction.Prescription.Drug.TradeName,
-                    DoctorName = transaction.Prescription.Doctor.Name,
-                    PharmacyName = transaction.Pharmacy.Name,
-                    LastFilled = transaction.DateFilled?.ToShortDateString(),
-                    LastCost = transaction.Cost?.ToString("C")
-                });
+                    model.Dashboard.Add(new DashboardRecord
+                    {
+                        TradeName = transaction.Prescription.Drug.TradeName,
+                        DrugName = transaction.Prescription.Drug.Name,
+                        DoctorName = transaction.Prescription.Doctor.Name,
+                        PharmacyName = transaction.Pharmacy.Name,
+                        LastFilled = transaction.DateFilled?.ToShortDateString(),
+                        LastCost = transaction.Cost?.ToString("C")
+                    });
+                }
             }
             return View(model);
         }
