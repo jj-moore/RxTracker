@@ -8,16 +8,16 @@
       <table class="table table-sm table-striped table-hover table-responsive">
         <thead>
           <tr>
-            <th>Hospital</th>
             <th>Doctor</th>
+            <th>Hospital</th>
           </tr>
         </thead>
         <tbody id="listBody">
           @foreach (var drug in Model.DoctorList)
           {
           <tr data-id="@drug.DoctorId">
-            <td>@drug.Hospital</td>
             <td>@drug.Name</td>
+            <td>@drug.Hospital</td>
           </tr>
           }
         </tbody>

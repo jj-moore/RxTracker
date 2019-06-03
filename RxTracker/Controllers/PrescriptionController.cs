@@ -30,14 +30,15 @@ namespace RxTracker.Controllers
             ListViewModel model = new ListViewModel
             {
                 PrescriptionList = _context.Prescription
-                .Where(p => p.Active && p.User == user)
-                .Include(p => p.Drug)
-                .Select(p => new PrescriptionListItem
-                {
-                    PrescriptionId = p.PrescriptionId,
-                    DrugName = p.Drug.Name,
-                    TradeName = p.Drug.TradeName
-                }).ToList()
+                    .Where(p => p.Active && p.User == user)
+                    .Include(p => p.Drug)
+                    .Include(p => p.Doctor)
+                    .Select(p => new PrescriptionListItem
+                    {
+                        PrescriptionId = p.PrescriptionId,
+                        DrugDisplayName = p.Drug.DisplayName,
+                        DoctorName = p.Doctor.Name
+                    }).ToList()
             };
             return View(model);
         }

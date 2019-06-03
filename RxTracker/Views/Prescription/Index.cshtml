@@ -8,16 +8,16 @@
       <table class="table table-sm table-striped table-hover table-responsive">
         <thead>
           <tr>
-            <th>Drug</th>
-            <th>Trade Name</th>
+            <th>Medication</th>
+            <th>Doctor</th>
           </tr>
         </thead>
         <tbody id="listBody">
           @foreach (var prescription in Model.PrescriptionList)
           {
             <tr data-id="@prescription.PrescriptionId">
-              <td>@prescription.DrugName</td>
-              <td>@prescription.TradeName</td>
+              <td>@prescription.DrugDisplayName</td>
+              <td>@prescription.DoctorName</td>
             </tr>
           }
         </tbody>

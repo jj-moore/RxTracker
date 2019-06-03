@@ -1,6 +1,18 @@
 ﻿body {
-    height: 100vw;
     background-image: linear-gradient(to bottom right, lightskyblue, ghostwhite);
+    height: 100vh;
+}
+
+.main-content {
+    height: 90vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-content: center;
+}
+
+footer .container {
+    text-align: center;
 }
 
 /**********************

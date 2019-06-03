@@ -2,16 +2,11 @@
 
   <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Drug.DrugId" id="recordId"/>
+    <input type="hidden" asp-for="Drug.DrugId" id="recordId" />
     <div class="form-group">
       <label asp-for="Drug.Name" class="control-label"></label>
       <input asp-for="Drug.Name" class="form-control" />
       <span asp-validation-for="Drug.Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-      <label asp-for="Drug.TradeName" class="control-label"></label>
-      <input asp-for="Drug.TradeName" class="form-control" />
-      <span asp-validation-for="Drug.TradeName" class="text-danger"></span>
     </div>
     <div class="form-group">
       <label asp-for="Drug.Manufacturer" class="control-label"></label>
@@ -19,10 +14,15 @@
       <span asp-validation-for="Drug.Manufacturer" class="text-danger"></span>
     </div>
     <div class="form-group">
+      <label asp-for="Drug.TradeName" class="control-label"></label>
+      <input asp-for="Drug.TradeName" class="form-control" />
+      <span asp-validation-for="Drug.TradeName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
       <label asp-for="Drug.GenericForId" class="control-label"></label>
       <select asp-for="Drug.GenericForId" class="form-control" asp-items="@(new SelectList(Model.GenericFor, "Value", "Text"))"></select>
       <span asp-validation-for="Drug.GenericForId" class="text-danger"></span>
-    </div>    
+    </div>
     <div class="form-group">
       <input type="submit" value="Save" class="btn btn-primary" />
       <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,9 @@ namespace RxTracker.Models
     public class Prescription
     {
         public int PrescriptionId { get; set; }
+        [Display(Name = "Doctor")]
         public int DoctorId { get; set; }
+        [Display(Name = "Medication")]
         public int DrugId { get; set; }
         public bool Active { get; set; } = true;
         public string Form { get; set; }

@@ -8,8 +8,7 @@
       <table class="table table-sm table-striped table-hover table-responsive">
         <thead>
           <tr>
-            <th>Drug</th>
-            <th>Trade Name</th>
+            <th>Medication</th>
             <th>Date</th>
             <th>Pharmacy</th>
           </tr>
@@ -18,8 +17,7 @@
           @foreach (var transaction in Model.TransactionList)
           {
           <tr data-id="@transaction.TransactionId">
-            <td>@transaction.DrugName</td>
-            <td>@transaction.TradeName</td>
+            <td>@transaction.DrugDisplayName</td>
             <td>@transaction.DateFilled</td>
             <td>@transaction.Pharmacy</td>
           </tr>

@@ -8,8 +8,8 @@ namespace RxTracker.ViewModels.Prescription
     public class PrescriptionListItem
     {
         public int PrescriptionId { get; set; }
-        public string DrugName { get; set; }
-        public string TradeName { get; set; }
+        public string DrugDisplayName { get; set; }
+        public string DoctorName { get; set; }
     }
 
     public class ListViewModel

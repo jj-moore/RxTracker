@@ -11,10 +11,15 @@ namespace RxTracker.Models
     public class Drug
     {
         public int DrugId { get; set; }
+        [Required]
+        [Display(Name = "Medication Name")]
         public string Name { get; set; }
+        [Display(Name = "Trade Name")]
         public string TradeName { get; set; }
         public string Manufacturer { get; set; }
+        [Display(Name = "Generic For")]
         public int? GenericForId { get; set; }
+        [Required]
         public string UserId { get; set; }
         public virtual MyUser User { get; set; }
         [NotMapped]

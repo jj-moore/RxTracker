@@ -65,6 +65,7 @@ namespace RxTracker.Controllers
                 Drug = drug,
                 GenericFor = _context.Drug
                     .Where(d => d.User == user && !string.IsNullOrEmpty(d.TradeName))
+                    .Where(d => d.DrugId != drug.DrugId)
                     .Select(d => new SelectHelper
                     {
                         Value = d.DrugId,

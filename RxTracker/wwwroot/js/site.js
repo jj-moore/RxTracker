@@ -26,6 +26,36 @@ function getPartialView(targetId) {
             partialDiv.innerHTML = text;
         })
         .then(() => {
+            if (controller == 'Drug') {
+                const tradeNameElement = document.getElementById('Drug_TradeName');
+                const genericForElement = document.getElementById('Drug_GenericForId');
+                if (tradeNameElement.value) {
+                    genericForElement.disabled = true;
+                } else if (genericForElement.value) {
+                    tradeNameElement.disabled = true;
+                }
+
+                tradeNameElement.addEventListener('blur', event => {
+                    console.log(event.target);
+                    const genericForElement = document.getElementById('Drug_GenericForId');
+                    if (event.target.value) {
+                        genericForElement.disabled = true;
+                    } else {
+                        genericForElement.disabled = false;
+                    }
+                });
+
+                genericForElement.addEventListener('change', event => {
+                    console.log(event.target);
+                    const tradeNameElement = document.getElementById('Drug_TradeName');
+                    if (event.target.value) {
+                        tradeNameElement.disabled = false;
+                    } else {
+                        tradeNameElement.disabled = true;
+                    }
+                })
+            }
+
             document.getElementById('btnDelete').addEventListener('click', deleteRecord);
         })
         .catch(error => {

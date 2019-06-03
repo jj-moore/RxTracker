@@ -35,8 +35,7 @@ namespace RxTracker.Controllers
                     {
                         TransactionId = t.TransactionId,
                         DateFilled = t.DateFilled.HasValue ? t.DateFilled.Value.ToShortDateString() : null,
-                        DrugName = t.Prescription.Drug.Name,
-                        TradeName = t.Prescription.Drug.TradeName,
+                        DrugDisplayName = t.Prescription.Drug.DisplayName,
                         Pharmacy = t.Pharmacy.Name
                     })
                     .OrderBy(t => t.DateFilled)
