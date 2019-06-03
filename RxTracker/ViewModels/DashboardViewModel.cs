@@ -8,21 +8,11 @@ namespace RxTracker.ViewModels
 {
     public class DashboardRecord
     {
-        public string DrugName { get; set; }
-        public string TradeName { get; set; }
         public string DoctorName { get; set; }
         public string PharmacyName { get; set; }
         public string LastFilled { get; set; }
         public string LastCost { get; set; }
-        public string DrugDisplayName
-        {
-            get
-            {
-                return string.IsNullOrEmpty(TradeName) ?
-                    DrugName :
-                    $"{TradeName} ({DrugName})";
-            }
-        }
+        public string DrugDisplayName { get; set; }
     }
 
     public class DashboardViewModel

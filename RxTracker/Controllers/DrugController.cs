@@ -37,10 +37,9 @@ namespace RxTracker.Controllers
                     .Select(d => new DrugListItem
                     {
                         DrugId = d.DrugId,
-                        Name = d.Name,
-                        TradeName = d.TradeName
+                        DisplayName = d.DisplayName
                     })
-                    .OrderBy(d => d.Name)
+                    .OrderBy(d => d.DisplayName)
                     .ToList()
             };
             return View(model);
@@ -69,7 +68,7 @@ namespace RxTracker.Controllers
                     .Select(d => new SelectHelper
                     {
                         Value = d.DrugId,
-                        Text = d.TradeName
+                        Text = d.DisplayName
                     })
                     .OrderBy(d => d.Text)
                     .ToList()

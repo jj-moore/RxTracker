@@ -35,8 +35,8 @@ namespace RxTracker.Controllers
                 .Where(d => d.User == user)
                 .Select(d => new ViewModels.Doctor.DoctorListItem
                 {
-                    Hospital = d.Hospital,
                     DoctorId = d.DoctorId,
+                    Hospital = d.Hospital,
                     Name = d.Name
                 })
                 .ToList()

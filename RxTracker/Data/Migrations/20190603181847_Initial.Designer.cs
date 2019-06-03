@@ -10,8 +10,8 @@ using RxTracker.Data;
 namespace RxTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190529162955_Please work")]
-    partial class Pleasework
+    [Migration("20190603181847_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,20 +165,23 @@ namespace RxTracker.Data.Migrations
                             DoctorId = 1,
                             Address = "East Ann Arbor",
                             Hospital = "University Hospital",
-                            Name = "Bob Pharma"
+                            Name = "Bob Pharma",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DoctorId = 2,
                             Address = "Traverse City, MI",
                             Hospital = "VA Hospital",
-                            Name = "Jane Cuts"
+                            Name = "Jane Cuts",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DoctorId = 3,
                             Address = "Hell, MI",
-                            Name = "Dr. Strangelove"
+                            Name = "Dr. Strangelove",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -216,33 +219,38 @@ namespace RxTracker.Data.Migrations
                             DrugId = 1,
                             Manufacturer = "Pfizer",
                             Name = "Atorvastatin",
-                            TradeName = "Lipitor"
+                            TradeName = "Lipitor",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 2,
                             GenericForId = 1,
-                            Name = "Atorvastatin"
+                            Name = "Atorvastatin",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 3,
                             Manufacturer = "Reckitt Benckiser",
                             Name = "Buprenorphine/naloxone",
-                            TradeName = "Suboxone"
+                            TradeName = "Suboxone",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 4,
                             Manufacturer = "Pfizer",
                             Name = "Pregabalin",
-                            TradeName = "Lyrica"
+                            TradeName = "Lyrica",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 5,
                             GenericForId = 3,
-                            Name = "Buprenorphine/naloxone"
+                            Name = "Buprenorphine/naloxone",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -301,54 +309,27 @@ namespace RxTracker.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("RxTracker.Models.Patient", b =>
-                {
-                    b.Property<int>("PatientId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(80);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(80);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(80);
-
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(80);
-
-                    b.HasKey("PatientId");
-
-                    b.ToTable("Patient");
 
                     b.HasData(
                         new
                         {
-                            PatientId = 1,
-                            DateOfBirth = new DateTime(1965, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mary@example.com",
-                            FirstName = "Mary",
-                            LastName = "Smith",
-                            PhoneNumber = "5556567890"
-                        },
-                        new
-                        {
-                            PatientId = 2,
-                            DateOfBirth = new DateTime(1950, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mickey@example.com",
-                            FirstName = "Mickey",
-                            LastName = "Mouse",
-                            PhoneNumber = "1237894560"
+                            Id = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "93c511c6-fd5f-4b3e-b4aa-a5602ec908e5",
+                            DOB = new DateTime(1972, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jane@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "JANE@EXAMPLE.COM",
+                            NormalizedUserName = "JANE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKcTyN1Z/Z+7Rp3oPfKhdJHrVDfX/xYEfNm8X2w3dOa7yM1Su9xEZhnF7ooHByTi/w==",
+                            PhoneNumber = "734-555-1234",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "075b2c3b-4f10-4c91-a96c-3cfe4e8d6f50",
+                            TwoFactorEnabled = false,
+                            UserName = "jane@example.com"
                         });
                 });
 
@@ -378,19 +359,22 @@ namespace RxTracker.Data.Migrations
                         {
                             PharmacyId = 1,
                             Address = "Carpenter Rd, Ypsilanti",
-                            Name = "Meijer"
+                            Name = "Meijer",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             PharmacyId = 2,
                             Address = "Mail Order",
-                            Name = "CVS Caremark"
+                            Name = "CVS Caremark",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             PharmacyId = 3,
                             Address = "Whittaker Rd, Ypsilanti, MI",
-                            Name = "CVS"
+                            Name = "CVS",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -413,8 +397,6 @@ namespace RxTracker.Data.Migrations
                     b.Property<string>("Form")
                         .HasMaxLength(80);
 
-                    b.Property<int>("PatientId");
-
                     b.Property<string>("Regimen")
                         .HasMaxLength(80);
 
@@ -425,8 +407,6 @@ namespace RxTracker.Data.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("DrugId");
-
-                    b.HasIndex("PatientId");
 
                     b.HasIndex("UserId");
 
@@ -441,8 +421,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "10mg/12.5mg",
                             DrugId = 2,
                             Form = "Sublingual Strip",
-                            PatientId = 2,
-                            Regimen = "Half strip, twice daily"
+                            Regimen = "Half strip, twice daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -452,8 +432,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "60mg",
                             DrugId = 4,
                             Form = "Tablet",
-                            PatientId = 1,
-                            Regimen = "Once daily"
+                            Regimen = "Once daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -463,8 +443,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "15mg/20mg",
                             DrugId = 5,
                             Form = "Tablet",
-                            PatientId = 1,
-                            Regimen = "Two tablets daily, morning and evening"
+                            Regimen = "Two tablets daily, morning and evening",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -474,8 +454,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "100mg",
                             DrugId = 2,
                             Form = "Tablet",
-                            PatientId = 1,
-                            Regimen = "Once daily"
+                            Regimen = "Once daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -485,8 +465,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "100mg",
                             DrugId = 1,
                             Form = "Capsule",
-                            PatientId = 2,
-                            Regimen = "Once daily"
+                            Regimen = "Once daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -696,11 +676,6 @@ namespace RxTracker.Data.Migrations
                     b.HasOne("RxTracker.Models.Drug", "Drug")
                         .WithMany("Prescriptions")
                         .HasForeignKey("DrugId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("RxTracker.Models.Patient", "Patient")
-                        .WithMany("Prescriptions")
-                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("RxTracker.Models.MyUser", "User")

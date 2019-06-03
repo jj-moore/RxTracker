@@ -15,7 +15,7 @@ namespace RxTracker.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -163,20 +163,23 @@ namespace RxTracker.Data.Migrations
                             DoctorId = 1,
                             Address = "East Ann Arbor",
                             Hospital = "University Hospital",
-                            Name = "Bob Pharma"
+                            Name = "Bob Pharma",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DoctorId = 2,
                             Address = "Traverse City, MI",
                             Hospital = "VA Hospital",
-                            Name = "Jane Cuts"
+                            Name = "Jane Cuts",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DoctorId = 3,
                             Address = "Hell, MI",
-                            Name = "Dr. Strangelove"
+                            Name = "Dr. Strangelove",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -214,33 +217,38 @@ namespace RxTracker.Data.Migrations
                             DrugId = 1,
                             Manufacturer = "Pfizer",
                             Name = "Atorvastatin",
-                            TradeName = "Lipitor"
+                            TradeName = "Lipitor",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 2,
                             GenericForId = 1,
-                            Name = "Atorvastatin"
+                            Name = "Atorvastatin",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 3,
                             Manufacturer = "Reckitt Benckiser",
                             Name = "Buprenorphine/naloxone",
-                            TradeName = "Suboxone"
+                            TradeName = "Suboxone",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 4,
                             Manufacturer = "Pfizer",
                             Name = "Pregabalin",
-                            TradeName = "Lyrica"
+                            TradeName = "Lyrica",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             DrugId = 5,
                             GenericForId = 3,
-                            Name = "Buprenorphine/naloxone"
+                            Name = "Buprenorphine/naloxone",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -299,6 +307,28 @@ namespace RxTracker.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "93c511c6-fd5f-4b3e-b4aa-a5602ec908e5",
+                            DOB = new DateTime(1972, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jane@example.com",
+                            EmailConfirmed = false,
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "JANE@EXAMPLE.COM",
+                            NormalizedUserName = "JANE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKcTyN1Z/Z+7Rp3oPfKhdJHrVDfX/xYEfNm8X2w3dOa7yM1Su9xEZhnF7ooHByTi/w==",
+                            PhoneNumber = "734-555-1234",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "075b2c3b-4f10-4c91-a96c-3cfe4e8d6f50",
+                            TwoFactorEnabled = false,
+                            UserName = "jane@example.com"
+                        });
                 });
 
             modelBuilder.Entity("RxTracker.Models.Pharmacy", b =>
@@ -327,19 +357,22 @@ namespace RxTracker.Data.Migrations
                         {
                             PharmacyId = 1,
                             Address = "Carpenter Rd, Ypsilanti",
-                            Name = "Meijer"
+                            Name = "Meijer",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             PharmacyId = 2,
                             Address = "Mail Order",
-                            Name = "CVS Caremark"
+                            Name = "CVS Caremark",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
                             PharmacyId = 3,
                             Address = "Whittaker Rd, Ypsilanti, MI",
-                            Name = "CVS"
+                            Name = "CVS",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 
@@ -386,7 +419,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "10mg/12.5mg",
                             DrugId = 2,
                             Form = "Sublingual Strip",
-                            Regimen = "Half strip, twice daily"
+                            Regimen = "Half strip, twice daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -396,7 +430,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "60mg",
                             DrugId = 4,
                             Form = "Tablet",
-                            Regimen = "Once daily"
+                            Regimen = "Once daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -406,7 +441,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "15mg/20mg",
                             DrugId = 5,
                             Form = "Tablet",
-                            Regimen = "Two tablets daily, morning and evening"
+                            Regimen = "Two tablets daily, morning and evening",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -416,7 +452,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "100mg",
                             DrugId = 2,
                             Form = "Tablet",
-                            Regimen = "Once daily"
+                            Regimen = "Once daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         },
                         new
                         {
@@ -426,7 +463,8 @@ namespace RxTracker.Data.Migrations
                             Dosage = "100mg",
                             DrugId = 1,
                             Form = "Capsule",
-                            Regimen = "Once daily"
+                            Regimen = "Once daily",
+                            UserId = "5e7cdd9e-601b-4b8d-9921-8de88f1e61e8"
                         });
                 });
 

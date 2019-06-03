@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RxTracker.Models;
 using System;
 
@@ -8,13 +9,38 @@ namespace RxTracker.Data
     {
         public static void Seed(this ModelBuilder builder)
         {
+            var userId = Guid.NewGuid().ToString();
+            var hasher = new PasswordHasher<MyUser>();
+            builder.Entity<MyUser>().HasData(new MyUser
+            {
+                Id = userId,
+                UserName = "jane@example.com",
+                NormalizedUserName = "JANE@EXAMPLE.COM",
+                Email = "jane@example.com",
+                NormalizedEmail = "JANE@EXAMPLE.COM",
+                EmailConfirmed = false,
+                PasswordHash = hasher.HashPassword(null, "jane"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                PhoneNumber = "734-555-1234",
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnd = null,
+                LockoutEnabled = true,
+                AccessFailedCount = 0,
+                DOB = new DateTime(1972, 6, 24),
+                FirstName = "Jane",
+                LastName = "Doe"
+            });
+
             builder.Entity<Doctor>().HasData(
                     new Doctor
                     {
                         DoctorId = 1,
                         Name = "Bob Pharma",
                         Hospital = "University Hospital",
-                        Address = "East Ann Arbor"
+                        Address = "East Ann Arbor",
+                        UserId = userId
                     },
                     new Doctor
                     {
@@ -22,14 +48,15 @@ namespace RxTracker.Data
                         DoctorId = 2,
                         Name = "Jane Cuts",
                         Hospital = "VA Hospital",
-                        Address = "Traverse City, MI"
+                        Address = "Traverse City, MI",
+                        UserId = userId
                     },
                     new Doctor
                     {
-
                         DoctorId = 3,
                         Name = "Dr. Strangelove",
-                        Address = "Hell, MI"
+                        Address = "Hell, MI",
+                        UserId = userId
                     });
 
             builder.Entity<Drug>().HasData(
@@ -38,55 +65,61 @@ namespace RxTracker.Data
                         DrugId = 1,
                         Name = "Atorvastatin",
                         TradeName = "Lipitor",
-                        Manufacturer = "Pfizer"
+                        Manufacturer = "Pfizer",
+                        UserId = userId
                     },
                     new Drug
                     {
                         DrugId = 2,
                         Name = "Atorvastatin",
-                        GenericForId = 1
+                        GenericForId = 1,
+                        UserId = userId
                     },
                     new Drug
                     {
                         DrugId = 3,
                         Name = "Buprenorphine/naloxone",
                         TradeName = "Suboxone",
-                        Manufacturer = "Reckitt Benckiser"
+                        Manufacturer = "Reckitt Benckiser",
+                        UserId = userId
                     },
                     new Drug
                     {
                         DrugId = 4,
                         Name = "Pregabalin",
                         TradeName = "Lyrica",
-                        Manufacturer = "Pfizer"
+                        Manufacturer = "Pfizer",
+                        UserId = userId
                     },
                     new Drug
                     {
                         DrugId = 5,
                         Name = "Buprenorphine/naloxone",
-                        GenericForId = 3
+                        GenericForId = 3,
+                        UserId = userId
                     });
-
-            
 
             builder.Entity<Pharmacy>().HasData(
                 new Pharmacy
                 {
                     PharmacyId = 1,
                     Name = "Meijer",
-                    Address = "Carpenter Rd, Ypsilanti"
+                    Address = "Carpenter Rd, Ypsilanti",
+                    UserId = userId
                 },
                 new Pharmacy
                 {
                     PharmacyId = 2,
                     Name = "CVS Caremark",
-                    Address = "Mail Order"
+                    Address = "Mail Order",
+                    UserId = userId
                 },
                 new Pharmacy
                 {
                     PharmacyId = 3,
                     Name = "CVS",
-                    Address = "Whittaker Rd, Ypsilanti, MI"
+                    Address = "Whittaker Rd, Ypsilanti, MI",
+                    UserId = userId
                 });
 
             builder.Entity<Prescription>().HasData(
@@ -98,7 +131,8 @@ namespace RxTracker.Data
                     Active = true,
                     Form = "Sublingual Strip",
                     Dosage = "10mg/12.5mg",
-                    Regimen = "Half strip, twice daily"
+                    Regimen = "Half strip, twice daily",
+                    UserId = userId
                 },
                 new Prescription
                 {
@@ -108,7 +142,8 @@ namespace RxTracker.Data
                     Active = true,
                     Form = "Tablet",
                     Dosage = "60mg",
-                    Regimen = "Once daily"
+                    Regimen = "Once daily",
+                    UserId = userId
                 },
                 new Prescription
                 {
@@ -118,7 +153,8 @@ namespace RxTracker.Data
                     Active = true,
                     Form = "Tablet",
                     Dosage = "15mg/20mg",
-                    Regimen = "Two tablets daily, morning and evening"
+                    Regimen = "Two tablets daily, morning and evening",
+                    UserId = userId
                 },
                 new Prescription
                 {
@@ -128,7 +164,8 @@ namespace RxTracker.Data
                     Active = true,
                     Form = "Tablet",
                     Dosage = "100mg",
-                    Regimen = "Once daily"
+                    Regimen = "Once daily",
+                    UserId = userId
                 },
                 new Prescription
                 {
@@ -138,7 +175,8 @@ namespace RxTracker.Data
                     Active = false,
                     Form = "Capsule",
                     Dosage = "100mg",
-                    Regimen = "Once daily"
+                    Regimen = "Once daily",
+                    UserId = userId
                 });
 
             builder.Entity<Transaction>().HasData(
@@ -191,7 +229,7 @@ namespace RxTracker.Data
                 },
                 new Transaction
                 {
-                TransactionId = 6,
+                    TransactionId = 6,
                     PrescriptionId = 2,
                     PharmacyId = 1,
                     DateFilled = new DateTime(2019, 4, 10),

@@ -13,6 +13,7 @@ namespace RxTracker.Models
         public string Name { get; set; }
         public string Hospital { get; set; }
         public string Address { get; set; }
+        public string UserId { get; set; }
         public virtual MyUser User { get; set; }
 
         public ICollection<Prescription> Prescriptions { get; set; }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
 using RxTracker.Models;
+using RxTracker.ViewModels;
 using System.Linq;
 
 namespace RxTracker.Controllers
@@ -65,22 +66,32 @@ namespace RxTracker.Controllers
                 Transaction = transaction,
                 Prescription = _context.Prescription
                     .Include(p => p.Drug)
-                    .Where(p => p.Drug.User == user)
-                    .Select(p => new ViewModels.SelectHelper
+                    .Where(p => p.User == user)
+                    .Select(p => new SelectHelper
                     {
                         Value = p.PrescriptionId,
-                        Text = p.Drug.Name
+                        Text = p.Drug.DisplayName
                     })
                     .ToList(),
                 Pharmacy = _context.Pharmacy
                     .Where(p => p.User == user)
-                    .Select(p => new ViewModels.SelectHelper
+                    .Select(p => new SelectHelper
                     {
                         Value = p.PharmacyId,
                         Text = p.Name
                     })
                     .ToList(),
             };
+            model.Prescription.Insert(0, new SelectHelper
+            {
+                Value = 0,
+                Text = ""
+            });
+            model.Pharmacy.Insert(0, new SelectHelper
+            {
+                Value = 0,
+                Text = ""
+            });
 
             return PartialView("_TransactionPartial", model);
         }
@@ -115,7 +126,7 @@ namespace RxTracker.Controllers
         // POST: Transaction/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
             Transaction transactionToDelete = _context.Transaction.Find(id);
             if (transactionToDelete == null)

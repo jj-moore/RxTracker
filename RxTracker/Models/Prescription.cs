@@ -15,6 +15,7 @@ namespace RxTracker.Models
         public string Form { get; set; }
         public string Dosage { get; set; }
         public string Regimen { get; set; }
+        public string UserId { get; set; }
 
         public Doctor Doctor { get; set; }
         public Drug Drug { get; set; }

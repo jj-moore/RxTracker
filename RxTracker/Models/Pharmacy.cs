@@ -11,6 +11,7 @@ namespace RxTracker.Models
         public int PharmacyId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public string UserId { get; set; }
         public virtual MyUser User { get; set; }
 
         public ICollection<Transaction> Transactions { get; set; }

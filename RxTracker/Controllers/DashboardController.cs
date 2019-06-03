@@ -46,8 +46,7 @@ namespace RxTracker.Controllers
                 {
                     model.Dashboard.Add(new DashboardRecord
                     {
-                        TradeName = transaction.Prescription.Drug.TradeName,
-                        DrugName = transaction.Prescription.Drug.Name,
+                        DrugDisplayName = transaction.Prescription.Drug.DisplayName,
                         DoctorName = transaction.Prescription.Doctor.Name,
                         PharmacyName = transaction.Pharmacy.Name,
                         LastFilled = transaction.DateFilled?.ToShortDateString(),

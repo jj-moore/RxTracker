@@ -76,6 +76,16 @@ namespace RxTracker.Controllers
                     })
                    .ToList(),
             };
+            model.Doctors.Insert(0, new SelectHelper
+            {
+                Value = 0,
+                Text = ""
+            });
+            model.Drugs.Insert(0, new SelectHelper
+            {
+                Value = 0,
+                Text = ""
+            });
 
             return PartialView("_PrescriptionPartial", model);
         }
