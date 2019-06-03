@@ -2,92 +2,127 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RxTracker.Data;
+using RxTracker.Models;
+using RxTracker.ViewModels.Pharmacy;
 
 namespace RxTracker.Controllers
 {
+    [Authorize]
     public class PharmacyController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<MyUser> _userManager;
+
+        public PharmacyController(ApplicationDbContext context, UserManager<MyUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+
         // GET: Pharmacy
         public ActionResult Index()
         {
-            return View();
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var model = new ListViewModel
+            {
+                PharmacyList = _context.Pharmacy
+                    .Where(p => p.User == user)
+                    .Select(p => new PharmacyListItem
+                    {
+                        PharmacyId = p.PharmacyId,
+                        Name = p.Name,
+                        Address = p.Address
+                    })
+                    .OrderBy(p => p.Name)
+                    .ToList()
+            };
+            return View(model);
         }
 
         // GET: Pharmacy/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
-
-        // GET: Pharmacy/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Pharmacy/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            Pharmacy pharmacy = _context.Pharmacy.Find(id);
+            if (pharmacy != null && pharmacy.User != user)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                return Unauthorized();
             }
-            catch
+            if (pharmacy == null)
             {
-                return View();
+                pharmacy = new Pharmacy();
             }
-        }
-
-        // GET: Pharmacy/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return PartialView("_PharmacyPartial", pharmacy);
         }
 
         // POST: Pharmacy/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Pharmacy pharmacy)
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            if (pharmacy.PharmacyId == 0)
+            {
+                pharmacy.User = user;
+                _context.Pharmacy.Add(pharmacy);
+            }
+            else
+            {
+                EditPharmacy(pharmacy, user);
+            }
+
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
             }
-            catch
+            catch (DbUpdateException)
             {
-                return View();
-            }
-        }
 
-        // GET: Pharmacy/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Pharmacy/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromBody]int id)
         {
+            Pharmacy pharmacyToDelete = _context.Pharmacy.Find(id);
+            if (pharmacyToDelete == null)
+            {
+                return NoContent();
+            }
+
+            _context.Pharmacy.Remove(pharmacyToDelete);
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
             }
-            catch
+            catch (DbUpdateException)
             {
-                return View();
+                return StatusCode(500);
             }
+
+            return Ok();
+        }
+
+        private bool EditPharmacy(Pharmacy pharmacy, MyUser user)
+        {
+            Pharmacy pharmacyToEdit = _context.Pharmacy.Find(pharmacy.PharmacyId);
+            if (pharmacyToEdit == null || pharmacyToEdit.User != user)
+            {
+                return false;
+            }
+
+            pharmacyToEdit.Name = pharmacy.Name;
+            pharmacyToEdit.Address = pharmacy.Address;
+            return true;
         }
     }
 }

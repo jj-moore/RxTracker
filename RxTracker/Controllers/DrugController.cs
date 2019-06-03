@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using RxTracker.ViewModels.Drug;
 
 namespace RxTracker.Controllers
 {
+    [Authorize]
     public class DrugController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -85,6 +87,8 @@ namespace RxTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Drug drug)
         {
+
+            drug.GenericForId = drug.GenericForId == 0 ? null : drug.GenericForId;
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (drug.DrugId == 0)
             {
@@ -143,7 +147,7 @@ namespace RxTracker.Controllers
             drugToEdit.Name = drug.Name;
             drugToEdit.TradeName = drug.TradeName;
             drugToEdit.Manufacturer = drug.Manufacturer;
-            drugToEdit.GenericForId = drug.GenericForId == 0 ? null : drug.GenericForId;
+            drugToEdit.GenericForId = drug.GenericForId;
             return true;
         }
     }

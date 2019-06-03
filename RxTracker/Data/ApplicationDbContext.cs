@@ -15,10 +15,8 @@ namespace RxTracker.Data
 
         }
 
-
         public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Drug> Drug { get; set; }
-        public DbSet<Patient> Patient { get; set; }
         public DbSet<Pharmacy> Pharmacy { get; set; }
         public DbSet<Prescription> Prescription { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
@@ -56,26 +54,6 @@ namespace RxTracker.Data
                     .HasMaxLength(80);
             });
 
-            builder.Entity<Patient>(entity =>
-            {
-                entity.HasKey(p => p.PatientId);
-
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(80)
-                    .IsRequired();
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(80)
-                    .IsRequired();
-                entity.Property(e => e.DateOfBirth)
-                    .HasColumnType("datetime");
-                entity.Property(e => e.PhoneNumber)
-                    .HasMaxLength(80);
-                entity.Property(e => e.Email)
-                    .HasMaxLength(80)
-                    .IsRequired();
-
-            });
-
             builder.Entity<Pharmacy>(entity =>
             {
                 entity.HasKey(p => p.PharmacyId);
@@ -98,11 +76,7 @@ namespace RxTracker.Data
                 entity.HasOne(d => d.Drug)
                     .WithMany(p => p.Prescriptions)
                     .HasForeignKey(d => d.DrugId);
-
-                entity.HasOne(d => d.Patient)
-                    .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(d => d.PatientId);
-
+                
                 entity.Property(e => e.Active)
                     .HasColumnType("tinyint");
 

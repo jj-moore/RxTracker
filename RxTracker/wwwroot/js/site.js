@@ -21,6 +21,7 @@ function getPartialView(targetId) {
     fetch(url)
         .then(response => response.text())
         .then(text => {
+            
             const partialDiv = document.getElementById('partialView');
             partialDiv.innerHTML = text;
         })

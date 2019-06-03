@@ -67,25 +67,7 @@ namespace RxTracker.Data
                         GenericForId = 3
                     });
 
-            builder.Entity<Patient>().HasData(
-                new Patient
-                {
-                    PatientId = 1,
-                    FirstName = "Mary",
-                    LastName = "Smith",
-                    DateOfBirth = new DateTime(1965, 10, 23),
-                    PhoneNumber = "5556567890",
-                    Email = "mary@example.com"
-                },
-                new Patient
-                {
-                    PatientId = 2,
-                    FirstName = "Mickey",
-                    LastName = "Mouse",
-                    DateOfBirth = new DateTime(1950, 6, 4),
-                    PhoneNumber = "1237894560",
-                    Email = "mickey@example.com"
-                });
+            
 
             builder.Entity<Pharmacy>().HasData(
                 new Pharmacy
@@ -111,7 +93,6 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 1,
-                    PatientId = 2,
                     DoctorId = 1,
                     DrugId = 2,
                     Active = true,
@@ -122,7 +103,6 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 2,
-                    PatientId = 1,
                     DoctorId = 3,
                     DrugId = 4,
                     Active = true,
@@ -133,7 +113,6 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 3,
-                    PatientId = 1,
                     DoctorId = 3,
                     DrugId = 5,
                     Active = true,
@@ -144,7 +123,6 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 4,
-                    PatientId = 1,
                     DoctorId = 2,
                     DrugId = 2,
                     Active = true,
@@ -155,7 +133,6 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 5,
-                    PatientId = 2,
                     DoctorId = 1,
                     DrugId = 1,
                     Active = false,

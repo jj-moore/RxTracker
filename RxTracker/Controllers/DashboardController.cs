@@ -22,8 +22,6 @@ namespace RxTracker.Controllers
             var groups = _context.Transaction
                  .Include(t => t.Pharmacy)
                  .Include(t => t.Prescription)
-                     .ThenInclude(p => p.Patient)
-                 .Include(t => t.Prescription)
                      .ThenInclude(p => p.Doctor)
                  .Include(t => t.Prescription)
                      .ThenInclude(p => p.Drug)
