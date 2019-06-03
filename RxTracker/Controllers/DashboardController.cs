@@ -21,6 +21,12 @@ namespace RxTracker.Controllers
             _userManager = userManager;
         }
 
+
+        /// <summary>
+        /// This is the landing page after a user authenticates. It displays a summary of
+        /// the last transaction for all active prescriptions.
+        /// </summary>
+        /// <returns>A web page with a summary of active prescriptions</returns>
         public IActionResult Index()
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;

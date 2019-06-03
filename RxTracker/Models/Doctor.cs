@@ -10,6 +10,7 @@ namespace RxTracker.Models
     public class Doctor
     {
         public int DoctorId { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Hospital { get; set; }
         public string Address { get; set; }

@@ -25,7 +25,12 @@ namespace RxTracker.Controllers
             _userManager = userManager;
         }
 
-        // GET: Doctor
+        /// <summary>
+        /// This is the page for doing CRUD operations on doctors. The user is
+        /// presented with a list of doctors. Selecting a doctor will display the
+        /// editable details.
+        /// </summary>
+        /// <returns>A stream of html representing the web page</returns>
         public ActionResult Index()
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
@@ -45,7 +50,15 @@ namespace RxTracker.Controllers
             return View(model);
         }
 
-        // GET: Doctor/Details/5
+        /// <summary>
+        /// Called by JavaScript to render the partial page which displays the details
+        /// of the selected doctor. This partial page is inserted into the website.
+        /// </summary>
+        /// <param name="id">The primary key of the doctor for whom details are being
+        /// requested. A check is made to make sure the current user is listed as the 
+        /// user on this doctor's record.
+        /// </param>
+        /// <returns>A stream of html representing the partial page showing details.</returns>
         public ActionResult Details(int id)
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
@@ -61,10 +74,8 @@ namespace RxTracker.Controllers
             return PartialView("_DoctorPartial", doctor);
         }
 
-        // POST: Doctor/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Doctor doctor)
+        public ActionResult Edit([FromBody]Doctor doctor)
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (doctor.DoctorId == 0)
@@ -86,7 +97,7 @@ namespace RxTracker.Controllers
 
             }
 
-            return RedirectToAction(nameof(Index));
+            return Json(doctor.DoctorId);
         }
 
         // POST: Doctor/Delete/5
