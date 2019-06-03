@@ -1,0 +1,41 @@
+﻿@model RxTracker.ViewModels.Transaction.EditViewModel
+
+<form asp-action="Edit">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <input type="hidden" asp-for="Transaction.TransactionId" />
+
+  <div class="form-group">
+    <label asp-for="Transaction.PrescriptionId" class="control-label"></label>
+    <select asp-for="Transaction.PrescriptionId" class="form-control" asp-items="@(new SelectList(Model.Prescription, "Value", "Text"))"></select>
+    <span asp-validation-for="Transaction.PrescriptionId" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Transaction.PharmacyId" class="control-label"></label>
+    <select asp-for="Transaction.PharmacyId" class="form-control" asp-items="@(new SelectList(Model.Pharmacy, "Value", "Text"))"></select>
+    <span asp-validation-for="Transaction.PharmacyId" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Transaction.DateFilled" class="control-label"></label>
+    <input type="date" asp-for="Transaction.DateFilled" class="form-control" />
+    <span asp-validation-for="Transaction.DateFilled" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Transaction.Cost" class="control-label"></label>
+    <input asp-for="Transaction.Cost" class="form-control" />
+    <span asp-validation-for="Transaction.Cost" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Transaction.InsuranceUsed" class="control-label"></label>
+    <input asp-for="Transaction.InsuranceUsed" class="form-control" />
+    <span asp-validation-for="Transaction.InsuranceUsed" class="text-danger"></span>
+  </div>  
+  <div class="form-group">
+    <label asp-for="Transaction.DiscountUsed" class="control-label"></label>
+    <input asp-for="Transaction.DiscountUsed" class="form-control" />
+    <span asp-validation-for="Transaction.DiscountUsed" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
+  </div>
+</form>
