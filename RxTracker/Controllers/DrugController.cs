@@ -29,6 +29,7 @@ namespace RxTracker.Controllers
         // GET: Drug
         public ActionResult Index()
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             ListViewModel model = new ListViewModel
             {
@@ -48,6 +49,7 @@ namespace RxTracker.Controllers
         // GET: Drug/Details/5
         public ActionResult Details(int id)
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             Drug drug = _context.Drug.Find(id);
             if (drug != null && drug.User != user)
@@ -88,6 +90,7 @@ namespace RxTracker.Controllers
         public ActionResult Edit(Drug drug)
         {
             drug.GenericForId = drug.GenericForId == 0 ? null : drug.GenericForId;
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (drug.DrugId == 0)
             {

@@ -26,6 +26,7 @@ namespace RxTracker.Controllers
         // GET: Prescription
         public ActionResult Index()
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             ListViewModel model = new ListViewModel
             {
@@ -46,6 +47,7 @@ namespace RxTracker.Controllers
         // GET: Prescription/Details/5
         public ActionResult Details(int id)
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             Prescription prescription = _context.Prescription.Find(id);
             if (prescription != null && prescription.User != user)
@@ -96,6 +98,7 @@ namespace RxTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Prescription prescription)
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (prescription.PrescriptionId == 0)
             {

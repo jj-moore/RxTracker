@@ -7,6 +7,10 @@ using RxTracker.Models;
 using RxTracker.ViewModels;
 using System.Linq;
 
+/* Filter Transactions By: Date, Medication, Doctor, Pharmacy
+All Current Prescriptions
+Total Cost By: Date, Medication, Doctor, Pharmacy */
+
 namespace RxTracker.Controllers
 {
     public class TransactionController : Controller
@@ -23,6 +27,7 @@ namespace RxTracker.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var model = new ViewModels.Transaction.ListViewModel
             {
@@ -47,6 +52,7 @@ namespace RxTracker.Controllers
         // GET: Transaction/Details/5
         public ActionResult Details(int id)
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             Transaction transaction = _context.Transaction
                 .Include(t => t.Prescription)
@@ -100,6 +106,7 @@ namespace RxTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Transaction transaction)
         {
+            // GET A REFERENCE TO THE USER
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             if (transaction.TransactionId == 0)
             {
