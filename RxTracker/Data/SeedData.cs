@@ -44,9 +44,8 @@ namespace RxTracker.Data
                     },
                     new Doctor
                     {
-
                         DoctorId = 2,
-                        Name = "Jane Cuts",
+                        Name = "Mary Cutz",
                         Hospital = "VA Hospital",
                         Address = "Traverse City, MI",
                         UserId = userId
@@ -54,8 +53,15 @@ namespace RxTracker.Data
                     new Doctor
                     {
                         DoctorId = 3,
-                        Name = "Dr. Strangelove",
+                        Name = "Dr. Feelgood",
                         Address = "Hell, MI",
+                        UserId = userId
+                    },
+                    new Doctor
+                    {
+                        DoctorId = 4,
+                        Name = "Douglas Adams",
+                        Address = "Sirius Beta",
                         UserId = userId
                     });
 
@@ -97,6 +103,65 @@ namespace RxTracker.Data
                         Name = "Buprenorphine/naloxone",
                         GenericForId = 3,
                         UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 6,
+                        Name = "Methylphenidate",
+                        TradeName ="Ritalin",
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 7,
+                        Name = "Methylphenidate",
+                        GenericForId = 6,
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 8,
+                        Name = "Beclomethasone",
+                        TradeName = "QVAR",
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 9,
+                        Name = "Estadiol",
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 10,
+                        Name = "Fluoxetine",
+                        TradeName = "Prozac",
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 11,
+                        Name = "Fluoxetine",
+                        GenericForId = 10,
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 12,
+                        Name = "Lisonopril HCL",
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 13,
+                        Name = "Trazodone",
+                        UserId = userId
+                    },
+                    new Drug
+                    {
+                        DrugId = 14,
+                        Name = "Oxybutynin",
+                        UserId = userId
                     });
 
             builder.Entity<Pharmacy>().HasData(
@@ -119,6 +184,20 @@ namespace RxTracker.Data
                     PharmacyId = 3,
                     Name = "CVS",
                     Address = "Whittaker Rd, Ypsilanti, MI",
+                    UserId = userId
+                },
+                new Pharmacy
+                {
+                    PharmacyId = 4,
+                    Name = "Kroger",
+                    Address = "Whittaker Rd, Ypsilanti, MI",
+                    UserId = userId
+                },
+                new Pharmacy
+                {
+                    PharmacyId = 5,
+                    Name = "Costco",
+                    Address = "Ellwworth Rd, Pittsfield, MI",
                     UserId = userId
                 });
 
@@ -172,7 +251,95 @@ namespace RxTracker.Data
                     PrescriptionId = 5,
                     DoctorId = 1,
                     DrugId = 1,
+                    Active = true,
+                    Form = "Capsule",
+                    Dosage = "100mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 6,
+                    DoctorId = 1,
+                    DrugId = 8,
                     Active = false,
+                    Form = "Inhaler",
+                    Dosage = "60mcg",
+                    Regimen = "Two puffs, twice daily or as needed",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 7,
+                    DoctorId = 1,
+                    DrugId = 9,
+                    Active = true,
+                    Form = "Patch",
+                    Dosage = "0.1mg",
+                    Regimen = "Once weekly",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 8,
+                    DoctorId = 3,
+                    DrugId = 11,
+                    Active = true,
+                    Form = "Tablet",
+                    Dosage = "50mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 9,
+                    DoctorId = 1,
+                    DrugId = 12,
+                    Active = true,
+                    Form = "Tablet",
+                    Dosage = "10-12.5mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 10,
+                    DoctorId = 1,
+                    DrugId = 13,
+                    Active = true,
+                    Form = "Capsule",
+                    Dosage = "100mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 11,
+                    DoctorId = 3,
+                    DrugId = 6,
+                    Active = true,
+                    Form = "Capsule",
+                    Dosage = "100mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 12,
+                    DoctorId = 3,
+                    DrugId = 7,
+                    Active = true,
+                    Form = "Capsule",
+                    Dosage = "100mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 13,
+                    DoctorId = 3,
+                    DrugId = 10,
+                    Active = true,
                     Form = "Capsule",
                     Dosage = "100mg",
                     Regimen = "Once daily",
