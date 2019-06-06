@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +6,7 @@ using RxTracker.Data;
 using RxTracker.Models;
 using RxTracker.ViewModels;
 using RxTracker.ViewModels.Drug;
+using System.Linq;
 
 namespace RxTracker.Controllers
 {
@@ -53,7 +49,7 @@ namespace RxTracker.Controllers
                     .OrderBy(d => d.DisplayName)
                     .ToList()
             };
-            
+
             // RETURN THE VIEW POPULATED WITH INFORMATION FROM THE DATABASE
             return View(model);
         }
@@ -169,7 +165,7 @@ namespace RxTracker.Controllers
         /// current user, will execute the delete statement.
         /// </summary>
         /// <param name="id">The DrugId of the drug to delete</param>
-        /// <returns>Returns a 204 if the drug is not found, 401 is this drug
+        /// <returns>Returns a 204 if the drug is not found, 401 if this drug
         /// is not associated with this user, 500 if there is an error while deleting
         /// or 200 if the drug is successfully deleted</returns>
         [HttpPost]
@@ -214,14 +210,14 @@ namespace RxTracker.Controllers
         /// <summary>
         /// Method to handled the updating of a drug. After confirming the drug is associated
         /// with the current user, the drug details are set to the passed in parameters and
-        /// a boolean response is returned to the caller to indicate if the drug was in memory
+        /// a boolean response is returned to the caller to indicate if the in memory
         /// version of the drug was successfully edited. This method does not persist the changes.
         /// The caller is required to do that.
         /// </summary>
         /// <param name="drug">The details of the drug to be edited</param>
         /// <param name="user">The user associated with this request</param>
-        /// <returns>True if the drug was loaded into memory from the database and sucessfully edited
-        /// and false otherwise
+        /// <returns>True if the drug was loaded into memory from the database and sucessfully edited,
+        /// false otherwise
         /// </returns>
         private bool EditDrug(Drug drug, MyUser user)
         {

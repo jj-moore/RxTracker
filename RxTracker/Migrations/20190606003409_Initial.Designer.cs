@@ -10,7 +10,7 @@ using RxTracker.Data;
 namespace RxTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190605011606_Initial")]
+    [Migration("20190606003409_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,7 +166,7 @@ namespace RxTracker.Migrations
                             Address = "East Ann Arbor",
                             Hospital = "University Hospital",
                             Name = "Bob Pharma",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -174,21 +174,21 @@ namespace RxTracker.Migrations
                             Address = "Traverse City, MI",
                             Hospital = "VA Hospital",
                             Name = "Mary Cutz",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DoctorId = 3,
                             Address = "Hell, MI",
                             Name = "Dr. Feelgood",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DoctorId = 4,
                             Address = "Sirius Beta",
                             Name = "Douglas Adams",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         });
                 });
 
@@ -228,14 +228,14 @@ namespace RxTracker.Migrations
                             Manufacturer = "Pfizer",
                             Name = "Atorvastatin",
                             TradeName = "Lipitor",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 2,
                             GenericForId = 1,
                             Name = "Atorvastatin",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -243,7 +243,7 @@ namespace RxTracker.Migrations
                             Manufacturer = "Reckitt Benckiser",
                             Name = "Buprenorphine/naloxone",
                             TradeName = "Suboxone",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -251,73 +251,73 @@ namespace RxTracker.Migrations
                             Manufacturer = "Pfizer",
                             Name = "Pregabalin",
                             TradeName = "Lyrica",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 5,
                             GenericForId = 3,
                             Name = "Buprenorphine/naloxone",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 6,
                             Name = "Methylphenidate",
                             TradeName = "Ritalin",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 7,
                             GenericForId = 6,
                             Name = "Methylphenidate",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 8,
                             Name = "Beclomethasone",
                             TradeName = "QVAR",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 9,
-                            Name = "Estadiol",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            Name = "Estradiol",
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 10,
                             Name = "Fluoxetine",
                             TradeName = "Prozac",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 11,
                             GenericForId = 10,
                             Name = "Fluoxetine",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 12,
                             Name = "Lisonopril HCL",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 13,
                             Name = "Trazodone",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             DrugId = 14,
                             Name = "Oxybutynin",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         });
                 });
 
@@ -380,9 +380,9 @@ namespace RxTracker.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e9f169e5-b403-4e5b-8a13-c02afd31194c",
+                            Id = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63eb8684-3e47-463d-bab4-9780c9b75ba4",
+                            ConcurrencyStamp = "afd7e1ee-b8b8-4511-bd35-86258377080c",
                             DOB = new DateTime(1972, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jane@example.com",
                             EmailConfirmed = false,
@@ -391,10 +391,10 @@ namespace RxTracker.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "JANE@EXAMPLE.COM",
                             NormalizedUserName = "JANE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE6L5Em7W+tw+m09evYY/1lYI8eHYqBTWRGfUFVGZTZYkcKeyZnUu5zMn5+vvRX5Dw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO/KSAhUbDv0li7Zz8F8zT+MFgyjIGfAoYchDplrmEYCeISgk4kXRJmzAItbC4dwdw==",
                             PhoneNumber = "734-555-1234",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a74e17e-12ed-4c1d-8cd5-293aab401fe2",
+                            SecurityStamp = "53b6c7a3-17fb-4b85-8a9f-c9474246b38d",
                             TwoFactorEnabled = false,
                             UserName = "jane@example.com"
                         });
@@ -427,35 +427,35 @@ namespace RxTracker.Migrations
                             PharmacyId = 1,
                             Address = "Carpenter Rd, Ypsilanti",
                             Name = "Meijer",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PharmacyId = 2,
                             Address = "Mail Order",
                             Name = "CVS Caremark",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PharmacyId = 3,
                             Address = "Whittaker Rd, Ypsilanti, MI",
                             Name = "CVS",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PharmacyId = 4,
                             Address = "Whittaker Rd, Ypsilanti, MI",
                             Name = "Kroger",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PharmacyId = 5,
                             Address = "Ellwworth Rd, Pittsfield, MI",
                             Name = "Costco",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         });
                 });
 
@@ -497,13 +497,24 @@ namespace RxTracker.Migrations
                         new
                         {
                             PrescriptionId = 1,
+                            Active = (byte)0,
+                            DoctorId = 1,
+                            Dosage = "25mg",
+                            DrugId = 1,
+                            Form = "Tablet",
+                            Regimen = "Once daily",
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                        },
+                        new
+                        {
+                            PrescriptionId = 16,
                             Active = (byte)1,
                             DoctorId = 1,
-                            Dosage = "10mg/12.5mg",
+                            Dosage = "20mg",
                             DrugId = 2,
-                            Form = "Sublingual Strip",
-                            Regimen = "Half strip, twice daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            Form = "Tablet",
+                            Regimen = "Once daily",
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -514,18 +525,29 @@ namespace RxTracker.Migrations
                             DrugId = 4,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PrescriptionId = 3,
-                            Active = (byte)1,
+                            Active = (byte)0,
                             DoctorId = 3,
                             Dosage = "15mg/20mg",
+                            DrugId = 3,
+                            Form = "Sublingual Strip",
+                            Regimen = "Half strip, twice daily",
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                        },
+                        new
+                        {
+                            PrescriptionId = 15,
+                            Active = (byte)1,
+                            DoctorId = 3,
+                            Dosage = "10mg/15mg",
                             DrugId = 5,
                             Form = "Tablet",
                             Regimen = "Two tablets daily, morning and evening",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -536,51 +558,51 @@ namespace RxTracker.Migrations
                             DrugId = 2,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
-                        },
-                        new
-                        {
-                            PrescriptionId = 5,
-                            Active = (byte)1,
-                            DoctorId = 1,
-                            Dosage = "100mg",
-                            DrugId = 1,
-                            Form = "Capsule",
-                            Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PrescriptionId = 6,
                             Active = (byte)0,
-                            DoctorId = 1,
+                            DoctorId = 4,
                             Dosage = "60mcg",
                             DrugId = 8,
                             Form = "Inhaler",
                             Regimen = "Two puffs, twice daily or as needed",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PrescriptionId = 7,
                             Active = (byte)1,
-                            DoctorId = 1,
+                            DoctorId = 2,
                             Dosage = "0.1mg",
                             DrugId = 9,
                             Form = "Patch",
                             Regimen = "Once weekly",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
                             PrescriptionId = 8,
+                            Active = (byte)0,
+                            DoctorId = 3,
+                            Dosage = "25mg",
+                            DrugId = 11,
+                            Form = "Tablet",
+                            Regimen = "Once daily",
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                        },
+                        new
+                        {
+                            PrescriptionId = 14,
                             Active = (byte)1,
                             DoctorId = 3,
                             Dosage = "50mg",
                             DrugId = 11,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -591,7 +613,7 @@ namespace RxTracker.Migrations
                             DrugId = 12,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -602,18 +624,7 @@ namespace RxTracker.Migrations
                             DrugId = 13,
                             Form = "Capsule",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
-                        },
-                        new
-                        {
-                            PrescriptionId = 11,
-                            Active = (byte)1,
-                            DoctorId = 3,
-                            Dosage = "100mg",
-                            DrugId = 6,
-                            Form = "Capsule",
-                            Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -624,7 +635,7 @@ namespace RxTracker.Migrations
                             DrugId = 7,
                             Form = "Capsule",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         },
                         new
                         {
@@ -635,7 +646,7 @@ namespace RxTracker.Migrations
                             DrugId = 10,
                             Form = "Capsule",
                             Regimen = "Once daily",
-                            UserId = "e9f169e5-b403-4e5b-8a13-c02afd31194c"
+                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
                         });
                 });
 
@@ -674,7 +685,7 @@ namespace RxTracker.Migrations
                         {
                             TransactionId = 1,
                             Cost = 20m,
-                            DateFilled = new DateTime(2019, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFilled = new DateTime(2018, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InsuranceUsed = "BCBS",
                             PharmacyId = 2,
                             PrescriptionId = 1
@@ -682,17 +693,17 @@ namespace RxTracker.Migrations
                         new
                         {
                             TransactionId = 2,
-                            Cost = 25m,
-                            DateFilled = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Cost = 20m,
+                            DateFilled = new DateTime(2019, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InsuranceUsed = "BCBS",
-                            PharmacyId = 3,
+                            PharmacyId = 2,
                             PrescriptionId = 1
                         },
                         new
                         {
                             TransactionId = 3,
                             Cost = 20m,
-                            DateFilled = new DateTime(2019, 3, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateFilled = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InsuranceUsed = "BCBS",
                             PharmacyId = 2,
                             PrescriptionId = 1
@@ -700,68 +711,249 @@ namespace RxTracker.Migrations
                         new
                         {
                             TransactionId = 4,
-                            Cost = 50m,
-                            DateFilled = new DateTime(2018, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "GoodRx",
-                            InsuranceUsed = "Aetna",
+                            Cost = 0m,
+                            DateFilled = new DateTime(2019, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "Free at Meijer",
+                            InsuranceUsed = "None",
                             PharmacyId = 1,
-                            PrescriptionId = 5
+                            PrescriptionId = 16
                         },
                         new
                         {
                             TransactionId = 5,
-                            Cost = 32.99m,
-                            DateFilled = new DateTime(2019, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "Manufacturer's Coupon",
-                            InsuranceUsed = "Molina",
+                            Cost = 0m,
+                            DateFilled = new DateTime(2019, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "Free at Meijer",
+                            InsuranceUsed = "None",
                             PharmacyId = 1,
-                            PrescriptionId = 2
+                            PrescriptionId = 16
                         },
                         new
                         {
                             TransactionId = 6,
-                            Cost = 30.65m,
-                            DateFilled = new DateTime(2019, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "Manufacturer's Coupon",
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 1,
-                            PrescriptionId = 2
+                            Cost = 78.32m,
+                            DateFilled = new DateTime(2019, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 3
                         },
                         new
                         {
                             TransactionId = 7,
-                            Cost = 41.82m,
-                            DateFilled = new DateTime(2019, 4, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            InsuranceUsed = "Molina",
-                            PharmacyId = 3,
+                            Cost = 75.67m,
+                            DateFilled = new DateTime(2019, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
                             PrescriptionId = 3
                         },
                         new
                         {
                             TransactionId = 8,
-                            Cost = 26.62m,
-                            DateFilled = new DateTime(2019, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Cost = 45.99m,
+                            DateFilled = new DateTime(2019, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InsuranceUsed = "Molina",
-                            PharmacyId = 2,
-                            PrescriptionId = 3
+                            PharmacyId = 5,
+                            PrescriptionId = 15
                         },
                         new
                         {
                             TransactionId = 9,
-                            Cost = 12.55m,
-                            DateFilled = new DateTime(2019, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiscountUsed = "GoodRx Gold",
-                            PharmacyId = 2,
-                            PrescriptionId = 4
+                            Cost = 25m,
+                            DateFilled = new DateTime(2019, 5, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "Manufacturer Coupon",
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 5,
+                            PrescriptionId = 15
                         },
                         new
                         {
                             TransactionId = 10,
-                            Cost = 9.82m,
-                            DateFilled = new DateTime(2019, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Cost = 45.08m,
+                            DateFilled = new DateTime(2018, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 2,
+                            PrescriptionId = 2
+                        },
+                        new
+                        {
+                            TransactionId = 11,
+                            Cost = 47.32m,
+                            DateFilled = new DateTime(2019, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 2,
+                            PrescriptionId = 2
+                        },
+                        new
+                        {
+                            TransactionId = 12,
+                            Cost = 47.32m,
+                            DateFilled = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 2,
+                            PrescriptionId = 2
+                        },
+                        new
+                        {
+                            TransactionId = 13,
+                            Cost = 60m,
+                            DateFilled = new DateTime(2019, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             InsuranceUsed = "Molina",
+                            PharmacyId = 2,
+                            PrescriptionId = 2
+                        },
+                        new
+                        {
+                            TransactionId = 14,
+                            Cost = 58.50m,
+                            DateFilled = new DateTime(2019, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 2,
+                            PrescriptionId = 2
+                        },
+                        new
+                        {
+                            TransactionId = 15,
+                            Cost = 3.55m,
+                            DateFilled = new DateTime(2018, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 12
+                        },
+                        new
+                        {
+                            TransactionId = 16,
+                            Cost = 2.85m,
+                            DateFilled = new DateTime(2019, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 12
+                        },
+                        new
+                        {
+                            TransactionId = 17,
+                            Cost = 3.80m,
+                            DateFilled = new DateTime(2019, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 4,
+                            PrescriptionId = 12
+                        },
+                        new
+                        {
+                            TransactionId = 18,
+                            Cost = 3.80m,
+                            DateFilled = new DateTime(2019, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 4,
+                            PrescriptionId = 12
+                        },
+                        new
+                        {
+                            TransactionId = 19,
+                            Cost = 25m,
+                            DateFilled = new DateTime(2019, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 3,
+                            PrescriptionId = 12
+                        },
+                        new
+                        {
+                            TransactionId = 20,
+                            Cost = 32.33m,
+                            DateFilled = new DateTime(2018, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 3,
+                            PrescriptionId = 6
+                        },
+                        new
+                        {
+                            TransactionId = 21,
+                            Cost = 33.34m,
+                            DateFilled = new DateTime(2019, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 3,
+                            PrescriptionId = 6
+                        },
+                        new
+                        {
+                            TransactionId = 22,
+                            Cost = 30.99m,
+                            DateFilled = new DateTime(2019, 2, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 3,
+                            PrescriptionId = 6
+                        },
+                        new
+                        {
+                            TransactionId = 23,
+                            Cost = 20.99m,
+                            DateFilled = new DateTime(2019, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "GoodRx",
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 5,
+                            PrescriptionId = 6
+                        },
+                        new
+                        {
+                            TransactionId = 24,
+                            Cost = 82.69m,
+                            DateFilled = new DateTime(2018, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "Good Rx",
+                            PharmacyId = 4,
+                            PrescriptionId = 7
+                        },
+                        new
+                        {
+                            TransactionId = 25,
+                            Cost = 84.99m,
+                            DateFilled = new DateTime(2019, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "Good Rx",
                             PharmacyId = 1,
-                            PrescriptionId = 4
+                            PrescriptionId = 7
+                        },
+                        new
+                        {
+                            TransactionId = 26,
+                            Cost = 1.85m,
+                            DateFilled = new DateTime(2018, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 8
+                        },
+                        new
+                        {
+                            TransactionId = 27,
+                            Cost = 1.99m,
+                            DateFilled = new DateTime(2019, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 8
+                        },
+                        new
+                        {
+                            TransactionId = 28,
+                            Cost = 2.55m,
+                            DateFilled = new DateTime(2019, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DiscountUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 14
+                        },
+                        new
+                        {
+                            TransactionId = 29,
+                            Cost = 2.55m,
+                            DateFilled = new DateTime(2019, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "BCBS",
+                            PharmacyId = 4,
+                            PrescriptionId = 14
+                        },
+                        new
+                        {
+                            TransactionId = 30,
+                            Cost = 2.85m,
+                            DateFilled = new DateTime(2019, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            InsuranceUsed = "Molina",
+                            PharmacyId = 4,
+                            PrescriptionId = 14
                         });
                 });
 

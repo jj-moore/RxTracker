@@ -128,7 +128,7 @@ namespace RxTracker.Data
                     new Drug
                     {
                         DrugId = 9,
-                        Name = "Estadiol",
+                        Name = "Estradiol",
                         UserId = userId
                     },
                     new Drug
@@ -206,11 +206,22 @@ namespace RxTracker.Data
                 {
                     PrescriptionId = 1,
                     DoctorId = 1,
+                    DrugId = 1,
+                    Active = false,
+                    Form = "Tablet",
+                    Dosage = "25mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 16,
+                    DoctorId = 1,
                     DrugId = 2,
                     Active = true,
-                    Form = "Sublingual Strip",
-                    Dosage = "10mg/12.5mg",
-                    Regimen = "Half strip, twice daily",
+                    Form = "Tablet",
+                    Dosage = "20mg",
+                    Regimen = "Once daily",
                     UserId = userId
                 },
                 new Prescription
@@ -228,10 +239,21 @@ namespace RxTracker.Data
                 {
                     PrescriptionId = 3,
                     DoctorId = 3,
+                    DrugId = 3,
+                    Active = false,
+                    Form = "Sublingual Strip",
+                    Dosage = "15mg/20mg",
+                    Regimen = "Half strip, twice daily",
+                    UserId = userId
+                }, 
+                new Prescription
+                {
+                    PrescriptionId = 15,
+                    DoctorId = 3,
                     DrugId = 5,
                     Active = true,
                     Form = "Tablet",
-                    Dosage = "15mg/20mg",
+                    Dosage = "10mg/15mg",
                     Regimen = "Two tablets daily, morning and evening",
                     UserId = userId
                 },
@@ -248,19 +270,8 @@ namespace RxTracker.Data
                 },
                 new Prescription
                 {
-                    PrescriptionId = 5,
-                    DoctorId = 1,
-                    DrugId = 1,
-                    Active = true,
-                    Form = "Capsule",
-                    Dosage = "100mg",
-                    Regimen = "Once daily",
-                    UserId = userId
-                },
-                new Prescription
-                {
                     PrescriptionId = 6,
-                    DoctorId = 1,
+                    DoctorId = 4,
                     DrugId = 8,
                     Active = false,
                     Form = "Inhaler",
@@ -271,7 +282,7 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 7,
-                    DoctorId = 1,
+                    DoctorId = 2,
                     DrugId = 9,
                     Active = true,
                     Form = "Patch",
@@ -282,6 +293,17 @@ namespace RxTracker.Data
                 new Prescription
                 {
                     PrescriptionId = 8,
+                    DoctorId = 3,
+                    DrugId = 11,
+                    Active = false,
+                    Form = "Tablet",
+                    Dosage = "25mg",
+                    Regimen = "Once daily",
+                    UserId = userId
+                },
+                new Prescription
+                {
+                    PrescriptionId = 14,
                     DoctorId = 3,
                     DrugId = 11,
                     Active = true,
@@ -306,17 +328,6 @@ namespace RxTracker.Data
                     PrescriptionId = 10,
                     DoctorId = 1,
                     DrugId = 13,
-                    Active = true,
-                    Form = "Capsule",
-                    Dosage = "100mg",
-                    Regimen = "Once daily",
-                    UserId = userId
-                },
-                new Prescription
-                {
-                    PrescriptionId = 11,
-                    DoctorId = 3,
-                    DrugId = 6,
                     Active = true,
                     Form = "Capsule",
                     Dosage = "100mg",
@@ -352,7 +363,7 @@ namespace RxTracker.Data
                     TransactionId = 1,
                     PrescriptionId = 1,
                     PharmacyId = 2,
-                    DateFilled = new DateTime(2019, 1, 5),
+                    DateFilled = new DateTime(2018, 12, 5),
                     Cost = 20,
                     InsuranceUsed = "BCBS"
                 },
@@ -360,9 +371,9 @@ namespace RxTracker.Data
                 {
                     TransactionId = 2,
                     PrescriptionId = 1,
-                    PharmacyId = 3,
-                    DateFilled = new DateTime(2019, 2, 15),
-                    Cost = 25,
+                    PharmacyId = 2,
+                    DateFilled = new DateTime(2019, 1, 8),
+                    Cost = 20,
                     InsuranceUsed = "BCBS"
                 },
                 new Transaction
@@ -370,74 +381,255 @@ namespace RxTracker.Data
                     TransactionId = 3,
                     PrescriptionId = 1,
                     PharmacyId = 2,
-                    DateFilled = new DateTime(2019, 3, 9),
+                    DateFilled = new DateTime(2019, 2, 15),
                     Cost = 20,
                     InsuranceUsed = "BCBS"
                 },
                 new Transaction
                 {
                     TransactionId = 4,
-                    PrescriptionId = 5,
+                    PrescriptionId = 16,
                     PharmacyId = 1,
-                    DateFilled = new DateTime(2018, 10, 21),
-                    Cost = 50,
-                    InsuranceUsed = "Aetna",
-                    DiscountUsed = "GoodRx"
+                    DateFilled = new DateTime(2019, 3, 2),
+                    Cost = 0,
+                    InsuranceUsed = "None",
+                    DiscountUsed = "Free at Meijer"
                 },
                 new Transaction
                 {
                     TransactionId = 5,
-                    PrescriptionId = 2,
+                    PrescriptionId = 16,
                     PharmacyId = 1,
-                    DateFilled = new DateTime(2019, 3, 15),
-                    Cost = 32.99M,
-                    InsuranceUsed = "Molina",
-                    DiscountUsed = "Manufacturer's Coupon"
+                    DateFilled = new DateTime(2019, 4, 4),
+                    Cost = 0,
+                    InsuranceUsed = "None",
+                    DiscountUsed = "Free at Meijer"
                 },
                 new Transaction
                 {
                     TransactionId = 6,
-                    PrescriptionId = 2,
-                    PharmacyId = 1,
-                    DateFilled = new DateTime(2019, 4, 10),
-                    Cost = 30.65M,
-                    InsuranceUsed = "Molina",
-                    DiscountUsed = "Manufacturer's Coupon"
+                    PrescriptionId = 3,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 2, 13),
+                    Cost = 78.32M,
+                    InsuranceUsed = "BCBS"
                 },
                 new Transaction
                 {
                     TransactionId = 7,
                     PrescriptionId = 3,
-                    PharmacyId = 3,
-                    DateFilled = new DateTime(2019, 4, 23),
-                    Cost = 41.82M,
-                    InsuranceUsed = "Molina"
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 3, 11),
+                    Cost = 75.67M,
+                    InsuranceUsed = "BCBS"
                 },
                 new Transaction
                 {
                     TransactionId = 8,
-                    PrescriptionId = 3,
-                    PharmacyId = 2,
-                    DateFilled = new DateTime(2019, 5, 31),
-                    Cost = 26.62M,
+                    PrescriptionId = 15,
+                    PharmacyId = 5,
+                    DateFilled = new DateTime(2019, 4, 25),
+                    Cost = 45.99M,
                     InsuranceUsed = "Molina"
                 },
                 new Transaction
                 {
                     TransactionId = 9,
-                    PrescriptionId = 4,
-                    PharmacyId = 2,
-                    DateFilled = new DateTime(2019, 3, 15),
-                    Cost = 12.55M,
-                    DiscountUsed = "GoodRx Gold"
+                    PrescriptionId = 15,
+                    PharmacyId = 5,
+                    DateFilled = new DateTime(2019, 5, 17),
+                    Cost = 25,
+                    InsuranceUsed = "Molina",
+                    DiscountUsed = "Manufacturer Coupon"
                 },
                 new Transaction
                 {
                     TransactionId = 10,
-                    PrescriptionId = 4,
+                    PrescriptionId = 2,
+                    PharmacyId = 2,
+                    DateFilled = new DateTime(2018, 12, 17),
+                    Cost = 45.08M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 11,
+                    PrescriptionId = 2,
+                    PharmacyId = 2,
+                    DateFilled = new DateTime(2019, 1, 10),
+                    Cost = 47.32M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 12,
+                    PrescriptionId = 2,
+                    PharmacyId = 2,
+                    DateFilled = new DateTime(2019, 2, 15),
+                    Cost = 47.32M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 13,
+                    PrescriptionId = 2,
+                    PharmacyId = 2,
+                    DateFilled = new DateTime(2019, 3, 20),
+                    Cost = 60,
+                    InsuranceUsed = "Molina"
+                },
+                new Transaction
+                {
+                    TransactionId = 14,
+                    PrescriptionId = 2,
+                    PharmacyId = 2,
+                    DateFilled = new DateTime(2019, 4, 28),
+                    Cost = 58.50M,
+                    InsuranceUsed = "Molina"
+                },
+                new Transaction
+                {
+                    TransactionId = 15,
+                    PrescriptionId = 12,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2018, 1, 10),
+                    Cost = 3.55M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 16,
+                    PrescriptionId = 12,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 2, 1),
+                    Cost = 2.85M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 17,
+                    PrescriptionId = 12,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 3, 4),
+                    Cost = 3.80M,
+                    InsuranceUsed = "Molina"
+                },
+                new Transaction
+                {
+                    TransactionId = 18,
+                    PrescriptionId = 12,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 4, 10),
+                    Cost = 3.80M,
+                    InsuranceUsed = "Molina"
+                },
+                new Transaction
+                {
+                    TransactionId = 19,
+                    PrescriptionId = 12,
+                    PharmacyId = 3,
+                    DateFilled = new DateTime(2019, 2, 15),
+                    Cost = 25,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 20,
+                    PrescriptionId = 6,
+                    PharmacyId = 3,
+                    DateFilled = new DateTime(2018, 11, 13),
+                    Cost = 32.33M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 21,
+                    PrescriptionId = 6,
+                    PharmacyId = 3,
+                    DateFilled = new DateTime(2019, 1, 5),
+                    Cost = 33.34M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 22,
+                    PrescriptionId = 6,
+                    PharmacyId = 3,
+                    DateFilled = new DateTime(2019, 2, 27),
+                    Cost = 30.99M,
+                    InsuranceUsed = "Molina"
+                },
+                new Transaction
+                {
+                    TransactionId = 23,
+                    PrescriptionId = 6,
+                    PharmacyId = 5,
+                    DateFilled = new DateTime(2019, 4, 21),
+                    Cost = 20.99M,
+                    InsuranceUsed = "Molina",
+                    DiscountUsed = "GoodRx"
+                },
+                new Transaction
+                {
+                    TransactionId = 24,
+                    PrescriptionId = 7,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2018, 12, 7),
+                    Cost = 82.69M,
+                    DiscountUsed = "Good Rx"
+                },
+                new Transaction
+                {
+                    TransactionId = 25,
+                    PrescriptionId = 7,
                     PharmacyId = 1,
-                    DateFilled = new DateTime(2019, 3, 15),
-                    Cost = 9.82M,
+                    DateFilled = new DateTime(2019, 3, 14),
+                    Cost = 84.99M,
+                    DiscountUsed = "Good Rx"
+                },
+                new Transaction
+                {
+                    TransactionId = 26,
+                    PrescriptionId = 8,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2018, 12, 7),
+                    Cost = 1.85M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 27,
+                    PrescriptionId = 8,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 1, 5),
+                    Cost = 1.99M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 28,
+                    PrescriptionId = 14,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 2, 6),
+                    Cost = 2.55M,
+                    DiscountUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 29,
+                    PrescriptionId = 14,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 3, 4),
+                    Cost = 2.55M,
+                    InsuranceUsed = "BCBS"
+                },
+                new Transaction
+                {
+                    TransactionId = 30,
+                    PrescriptionId = 14,
+                    PharmacyId = 4,
+                    DateFilled = new DateTime(2019, 4, 15),
+                    Cost = 2.85M,
                     InsuranceUsed = "Molina"
                 });
         }
