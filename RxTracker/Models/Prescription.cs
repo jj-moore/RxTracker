@@ -11,13 +11,16 @@ namespace RxTracker.Models
     {
         public int PrescriptionId { get; set; }
         [Display(Name = "Doctor")]
+        [Required]
         public int DoctorId { get; set; }
+        [Required]
         [Display(Name = "Medication")]
         public int DrugId { get; set; }
         public bool Active { get; set; } = true;
         public string Form { get; set; }
         public string Dosage { get; set; }
         public string Regimen { get; set; }
+        [Required]
         public string UserId { get; set; }
 
         public Doctor Doctor { get; set; }

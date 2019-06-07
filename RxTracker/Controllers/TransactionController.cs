@@ -110,6 +110,7 @@ namespace RxTracker.Controllers
                         Value = p.PrescriptionId,
                         Text = p.Drug.DisplayName
                     })
+                    .OrderBy(p => p.Value)
                     .ToList(),
                 Pharmacy = _context.Pharmacy
                     .Where(p => p.User == user)
@@ -118,20 +119,9 @@ namespace RxTracker.Controllers
                         Value = p.PharmacyId,
                         Text = p.Name
                     })
+                    .OrderBy(p => p.Value)
                     .ToList(),
             };
-
-            // INSERT BLANK RECORDS INTO THE SELECT LIST
-            model.Prescription.Insert(0, new SelectHelper
-            {
-                Value = 0,
-                Text = ""
-            });
-            model.Pharmacy.Insert(0, new SelectHelper
-            {
-                Value = 0,
-                Text = ""
-            });
 
             // GENERATE THE REQUIRED HTML AND RETURN
             return PartialView("_TransactionPartial", model);
@@ -247,7 +237,7 @@ namespace RxTracker.Controllers
                 .FirstOrDefault(t => t.TransactionId == transaction.TransactionId);
 
             // IF THE TRANSACTION IS NOT FOUND OR IS NOT ASSOCIATED WITH THIS USER RETURN FALSE
-            if (transactionToEdit == null || transactionToEdit.Pharmacy.User != user)
+            if (transactionToEdit == null || transactionToEdit.Pharmacy == null || transactionToEdit.Pharmacy.User != user)
             {
                 return false;
             }

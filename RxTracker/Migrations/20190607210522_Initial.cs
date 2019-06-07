@@ -41,8 +41,8 @@ namespace RxTracker.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
                     DOB = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
@@ -165,7 +165,7 @@ namespace RxTracker.Migrations
                     Name = table.Column<string>(maxLength: 80, nullable: false),
                     Hospital = table.Column<string>(maxLength: 80, nullable: true),
                     Address = table.Column<string>(maxLength: 256, nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,7 +175,7 @@ namespace RxTracker.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,7 +198,7 @@ namespace RxTracker.Migrations
                         column: x => x.GenericForId,
                         principalTable: "Drug",
                         principalColumn: "DrugId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Drug_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -215,7 +215,7 @@ namespace RxTracker.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 80, nullable: false),
                     Address = table.Column<string>(maxLength: 256, nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,7 +225,7 @@ namespace RxTracker.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,7 +240,7 @@ namespace RxTracker.Migrations
                     Form = table.Column<string>(maxLength: 80, nullable: true),
                     Dosage = table.Column<string>(maxLength: 80, nullable: true),
                     Regimen = table.Column<string>(maxLength: 80, nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,19 +250,19 @@ namespace RxTracker.Migrations
                         column: x => x.DoctorId,
                         principalTable: "Doctor",
                         principalColumn: "DoctorId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Prescription_Drug_DrugId",
                         column: x => x.DrugId,
                         principalTable: "Drug",
                         principalColumn: "DrugId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Prescription_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,7 +273,7 @@ namespace RxTracker.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PrescriptionId = table.Column<int>(nullable: false),
                     PharmacyId = table.Column<int>(nullable: false),
-                    DateFilled = table.Column<DateTime>(type: "datetime", nullable: true),
+                    DateFilled = table.Column<DateTime>(type: "datetime", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     InsuranceUsed = table.Column<string>(maxLength: 80, nullable: true),
                     DiscountUsed = table.Column<string>(maxLength: 80, nullable: true)
@@ -292,23 +292,23 @@ namespace RxTracker.Migrations
                         column: x => x.PrescriptionId,
                         principalTable: "Prescription",
                         principalColumn: "PrescriptionId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DOB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "c0a85163-ea56-4558-b867-6c2e0fc0b0ce", 0, "afd7e1ee-b8b8-4511-bd35-86258377080c", new DateTime(1972, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", false, "Jane", "Doe", true, null, "JANE@EXAMPLE.COM", "JANE@EXAMPLE.COM", "AQAAAAEAACcQAAAAEO/KSAhUbDv0li7Zz8F8zT+MFgyjIGfAoYchDplrmEYCeISgk4kXRJmzAItbC4dwdw==", "734-555-1234", false, "53b6c7a3-17fb-4b85-8a9f-c9474246b38d", false, "jane@example.com" });
+                values: new object[] { "d87b2a7a-502f-43a0-a269-4d8968d5fa6e", 0, "69f5077e-a9c0-434e-ae4f-850d1a7ca0c4", new DateTime(1972, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", false, "Jane", "Doe", true, null, "JANE@EXAMPLE.COM", "JANE@EXAMPLE.COM", "AQAAAAEAACcQAAAAEGcbL7MWdr8mmQvsyvaNVv2fpfFE0mRDYhYQvz75VZ635iR21ypR4pBHji13av/Vyg==", "734-555-1234", false, "80ee975d-032d-430f-a4d3-0bbac5dbda63", false, "jane@example.com" });
 
             migrationBuilder.InsertData(
                 table: "Doctor",
                 columns: new[] { "DoctorId", "Address", "Hospital", "Name", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "East Ann Arbor", "University Hospital", "Bob Pharma", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 2, "Traverse City, MI", "VA Hospital", "Mary Cutz", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 3, "Hell, MI", null, "Dr. Feelgood", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 4, "Sirius Beta", null, "Douglas Adams", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" }
+                    { 1, "East Ann Arbor", "University Hospital", "Bob Pharma", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 2, "Traverse City, MI", "VA Hospital", "Mary Cutz", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 3, "Hell, MI", null, "Dr. Feelgood", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 4, "Sirius Beta", null, "Douglas Adams", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" }
                 });
 
             migrationBuilder.InsertData(
@@ -316,16 +316,16 @@ namespace RxTracker.Migrations
                 columns: new[] { "DrugId", "GenericForId", "Manufacturer", "Name", "TradeName", "UserId" },
                 values: new object[,]
                 {
-                    { 14, null, null, "Oxybutynin", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 13, null, null, "Trazodone", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 12, null, null, "Lisonopril HCL", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 10, null, null, "Fluoxetine", "Prozac", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 9, null, null, "Estradiol", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 6, null, null, "Methylphenidate", "Ritalin", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 4, null, "Pfizer", "Pregabalin", "Lyrica", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 3, null, "Reckitt Benckiser", "Buprenorphine/naloxone", "Suboxone", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 1, null, "Pfizer", "Atorvastatin", "Lipitor", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 8, null, null, "Beclomethasone", "QVAR", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" }
+                    { 14, null, null, "Oxybutynin", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 13, null, null, "Trazodone", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 12, null, null, "Lisonopril HCL", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 10, null, null, "Fluoxetine", "Prozac", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 9, null, null, "Estradiol", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 6, null, null, "Methylphenidate", "Ritalin", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 4, null, "Pfizer", "Pregabalin", "Lyrica", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 3, null, "Reckitt Benckiser", "Buprenorphine/naloxone", "Suboxone", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 1, null, "Pfizer", "Atorvastatin", "Lipitor", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 8, null, null, "Beclomethasone", "QVAR", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" }
                 });
 
             migrationBuilder.InsertData(
@@ -333,11 +333,11 @@ namespace RxTracker.Migrations
                 columns: new[] { "PharmacyId", "Address", "Name", "UserId" },
                 values: new object[,]
                 {
-                    { 4, "Whittaker Rd, Ypsilanti, MI", "Kroger", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 1, "Carpenter Rd, Ypsilanti", "Meijer", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 2, "Mail Order", "CVS Caremark", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 3, "Whittaker Rd, Ypsilanti, MI", "CVS", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 5, "Ellwworth Rd, Pittsfield, MI", "Costco", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" }
+                    { 4, "Whittaker Rd, Ypsilanti, MI", "Kroger", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 1, "Carpenter Rd, Ypsilanti", "Meijer", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 2, "Mail Order", "CVS Caremark", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 3, "Whittaker Rd, Ypsilanti, MI", "CVS", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 5, "Ellwworth Rd, Pittsfield, MI", "Costco", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" }
                 });
 
             migrationBuilder.InsertData(
@@ -345,10 +345,10 @@ namespace RxTracker.Migrations
                 columns: new[] { "DrugId", "GenericForId", "Manufacturer", "Name", "TradeName", "UserId" },
                 values: new object[,]
                 {
-                    { 2, 1, null, "Atorvastatin", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 5, 3, null, "Buprenorphine/naloxone", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 7, 6, null, "Methylphenidate", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 11, 10, null, "Fluoxetine", null, "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" }
+                    { 2, 1, null, "Atorvastatin", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 5, 3, null, "Buprenorphine/naloxone", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 7, 6, null, "Methylphenidate", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 11, 10, null, "Fluoxetine", null, "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" }
                 });
 
             migrationBuilder.InsertData(
@@ -356,14 +356,14 @@ namespace RxTracker.Migrations
                 columns: new[] { "PrescriptionId", "Active", "DoctorId", "Dosage", "DrugId", "Form", "Regimen", "UserId" },
                 values: new object[,]
                 {
-                    { 1, (byte)0, 1, "25mg", 1, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 3, (byte)0, 3, "15mg/20mg", 3, "Sublingual Strip", "Half strip, twice daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 2, (byte)1, 3, "60mg", 4, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 6, (byte)0, 4, "60mcg", 8, "Inhaler", "Two puffs, twice daily or as needed", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 7, (byte)1, 2, "0.1mg", 9, "Patch", "Once weekly", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 13, (byte)1, 3, "100mg", 10, "Capsule", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 9, (byte)1, 1, "10-12.5mg", 12, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 10, (byte)1, 1, "100mg", 13, "Capsule", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" }
+                    { 1, (byte)0, 1, "25mg", 1, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 3, (byte)0, 3, "15mg/20mg", 3, "Sublingual Strip", "Half strip, twice daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 2, (byte)1, 3, "60mg", 4, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 6, (byte)0, 4, "60mcg", 8, "Inhaler", "Two puffs, twice daily or as needed", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 7, (byte)1, 2, "0.1mg", 9, "Patch", "Once weekly", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 13, (byte)1, 3, "100mg", 10, "Capsule", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 9, (byte)1, 1, "10-12.5mg", 12, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 10, (byte)1, 1, "100mg", 13, "Capsule", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" }
                 });
 
             migrationBuilder.InsertData(
@@ -371,12 +371,12 @@ namespace RxTracker.Migrations
                 columns: new[] { "PrescriptionId", "Active", "DoctorId", "Dosage", "DrugId", "Form", "Regimen", "UserId" },
                 values: new object[,]
                 {
-                    { 16, (byte)1, 1, "20mg", 2, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 12, (byte)1, 3, "100mg", 7, "Capsule", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 8, (byte)0, 3, "25mg", 11, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 15, (byte)1, 3, "10mg/15mg", 5, "Tablet", "Two tablets daily, morning and evening", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 14, (byte)1, 3, "50mg", 11, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" },
-                    { 4, (byte)1, 2, "100mg", 2, "Tablet", "Once daily", "c0a85163-ea56-4558-b867-6c2e0fc0b0ce" }
+                    { 16, (byte)1, 1, "20mg", 2, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 12, (byte)1, 3, "100mg", 7, "Capsule", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 8, (byte)0, 3, "25mg", 11, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 15, (byte)1, 3, "10mg/15mg", 5, "Tablet", "Two tablets daily, morning and evening", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 14, (byte)1, 3, "50mg", 11, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" },
+                    { 4, (byte)1, 2, "100mg", 2, "Tablet", "Once daily", "d87b2a7a-502f-43a0-a269-4d8968d5fa6e" }
                 });
 
             migrationBuilder.InsertData(

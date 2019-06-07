@@ -25,7 +25,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">Date</span>
     </div>
-    <input type="date" asp-for="Transaction.DateFilled" class="form-control" />
+    <input type="date" asp-for="Transaction.DateFilled" class="form-control" required/>
     <span asp-validation-for="Transaction.DateFilled" class="text-danger"></span>
   </div>
 

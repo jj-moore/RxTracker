@@ -149,7 +149,8 @@ namespace RxTracker.Migrations
                         .IsRequired()
                         .HasMaxLength(80);
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("DoctorId");
 
@@ -164,7 +165,7 @@ namespace RxTracker.Migrations
                             Address = "East Ann Arbor",
                             Hospital = "University Hospital",
                             Name = "Bob Pharma",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -172,21 +173,21 @@ namespace RxTracker.Migrations
                             Address = "Traverse City, MI",
                             Hospital = "VA Hospital",
                             Name = "Mary Cutz",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DoctorId = 3,
                             Address = "Hell, MI",
                             Name = "Dr. Feelgood",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DoctorId = 4,
                             Address = "Sirius Beta",
                             Name = "Douglas Adams",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         });
                 });
 
@@ -226,14 +227,14 @@ namespace RxTracker.Migrations
                             Manufacturer = "Pfizer",
                             Name = "Atorvastatin",
                             TradeName = "Lipitor",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 2,
                             GenericForId = 1,
                             Name = "Atorvastatin",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -241,7 +242,7 @@ namespace RxTracker.Migrations
                             Manufacturer = "Reckitt Benckiser",
                             Name = "Buprenorphine/naloxone",
                             TradeName = "Suboxone",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -249,73 +250,73 @@ namespace RxTracker.Migrations
                             Manufacturer = "Pfizer",
                             Name = "Pregabalin",
                             TradeName = "Lyrica",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 5,
                             GenericForId = 3,
                             Name = "Buprenorphine/naloxone",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 6,
                             Name = "Methylphenidate",
                             TradeName = "Ritalin",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 7,
                             GenericForId = 6,
                             Name = "Methylphenidate",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 8,
                             Name = "Beclomethasone",
                             TradeName = "QVAR",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 9,
                             Name = "Estradiol",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 10,
                             Name = "Fluoxetine",
                             TradeName = "Prozac",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 11,
                             GenericForId = 10,
                             Name = "Fluoxetine",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 12,
                             Name = "Lisonopril HCL",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 13,
                             Name = "Trazodone",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             DrugId = 14,
                             Name = "Oxybutynin",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         });
                 });
 
@@ -336,9 +337,11 @@ namespace RxTracker.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -378,9 +381,9 @@ namespace RxTracker.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce",
+                            Id = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "afd7e1ee-b8b8-4511-bd35-86258377080c",
+                            ConcurrencyStamp = "69f5077e-a9c0-434e-ae4f-850d1a7ca0c4",
                             DOB = new DateTime(1972, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jane@example.com",
                             EmailConfirmed = false,
@@ -389,10 +392,10 @@ namespace RxTracker.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "JANE@EXAMPLE.COM",
                             NormalizedUserName = "JANE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO/KSAhUbDv0li7Zz8F8zT+MFgyjIGfAoYchDplrmEYCeISgk4kXRJmzAItbC4dwdw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGcbL7MWdr8mmQvsyvaNVv2fpfFE0mRDYhYQvz75VZ635iR21ypR4pBHji13av/Vyg==",
                             PhoneNumber = "734-555-1234",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "53b6c7a3-17fb-4b85-8a9f-c9474246b38d",
+                            SecurityStamp = "80ee975d-032d-430f-a4d3-0bbac5dbda63",
                             TwoFactorEnabled = false,
                             UserName = "jane@example.com"
                         });
@@ -411,7 +414,8 @@ namespace RxTracker.Migrations
                         .IsRequired()
                         .HasMaxLength(80);
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("PharmacyId");
 
@@ -425,35 +429,35 @@ namespace RxTracker.Migrations
                             PharmacyId = 1,
                             Address = "Carpenter Rd, Ypsilanti",
                             Name = "Meijer",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             PharmacyId = 2,
                             Address = "Mail Order",
                             Name = "CVS Caremark",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             PharmacyId = 3,
                             Address = "Whittaker Rd, Ypsilanti, MI",
                             Name = "CVS",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             PharmacyId = 4,
                             Address = "Whittaker Rd, Ypsilanti, MI",
                             Name = "Kroger",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
                             PharmacyId = 5,
                             Address = "Ellwworth Rd, Pittsfield, MI",
                             Name = "Costco",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         });
                 });
 
@@ -479,7 +483,8 @@ namespace RxTracker.Migrations
                     b.Property<string>("Regimen")
                         .HasMaxLength(80);
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("PrescriptionId");
 
@@ -501,7 +506,7 @@ namespace RxTracker.Migrations
                             DrugId = 1,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -512,7 +517,7 @@ namespace RxTracker.Migrations
                             DrugId = 2,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -523,7 +528,7 @@ namespace RxTracker.Migrations
                             DrugId = 4,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -534,7 +539,7 @@ namespace RxTracker.Migrations
                             DrugId = 3,
                             Form = "Sublingual Strip",
                             Regimen = "Half strip, twice daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -545,7 +550,7 @@ namespace RxTracker.Migrations
                             DrugId = 5,
                             Form = "Tablet",
                             Regimen = "Two tablets daily, morning and evening",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -556,7 +561,7 @@ namespace RxTracker.Migrations
                             DrugId = 2,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -567,7 +572,7 @@ namespace RxTracker.Migrations
                             DrugId = 8,
                             Form = "Inhaler",
                             Regimen = "Two puffs, twice daily or as needed",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -578,7 +583,7 @@ namespace RxTracker.Migrations
                             DrugId = 9,
                             Form = "Patch",
                             Regimen = "Once weekly",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -589,7 +594,7 @@ namespace RxTracker.Migrations
                             DrugId = 11,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -600,7 +605,7 @@ namespace RxTracker.Migrations
                             DrugId = 11,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -611,7 +616,7 @@ namespace RxTracker.Migrations
                             DrugId = 12,
                             Form = "Tablet",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -622,7 +627,7 @@ namespace RxTracker.Migrations
                             DrugId = 13,
                             Form = "Capsule",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -633,7 +638,7 @@ namespace RxTracker.Migrations
                             DrugId = 7,
                             Form = "Capsule",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         },
                         new
                         {
@@ -644,7 +649,7 @@ namespace RxTracker.Migrations
                             DrugId = 10,
                             Form = "Capsule",
                             Regimen = "Once daily",
-                            UserId = "c0a85163-ea56-4558-b867-6c2e0fc0b0ce"
+                            UserId = "d87b2a7a-502f-43a0-a269-4d8968d5fa6e"
                         });
                 });
 
@@ -658,6 +663,7 @@ namespace RxTracker.Migrations
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime?>("DateFilled")
+                        .IsRequired()
                         .HasColumnType("datetime");
 
                     b.Property<string>("DiscountUsed")
@@ -1004,7 +1010,8 @@ namespace RxTracker.Migrations
                 {
                     b.HasOne("RxTracker.Models.MyUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("RxTracker.Models.Drug", b =>
@@ -1023,7 +1030,8 @@ namespace RxTracker.Migrations
                 {
                     b.HasOne("RxTracker.Models.MyUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("RxTracker.Models.Prescription", b =>
@@ -1040,7 +1048,8 @@ namespace RxTracker.Migrations
 
                     b.HasOne("RxTracker.Models.MyUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("RxTracker.Models.Transaction", b =>

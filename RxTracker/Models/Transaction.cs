@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,11 +11,14 @@ namespace RxTracker.Models
     {
         public int TransactionId { get; set; }
         [DisplayName("Medication")]
+        [Required]
         public int PrescriptionId { get; set; }
         [DisplayName("Pharmacy")]
+        [Required]
         public int PharmacyId { get; set; }
         [DisplayName("Date")]
-        public DateTime? DateFilled { get; set; }
+        [Required]
+        public DateTime? DateFilled { get; set; } = DateTime.Now;
         public decimal? Cost { get; set; }
         [DisplayName("Insurance Used")]
         public string InsuranceUsed { get; set; }
