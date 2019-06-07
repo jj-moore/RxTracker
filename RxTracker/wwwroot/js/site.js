@@ -10,9 +10,12 @@
         });
     }
 
-    document.getElementById('btnCreate').addEventListener('click', () => {
-        getPartialView(0);
-    });
+    const btnCreate = document.getElementById('btnCreate');
+    if (btnCreate) {
+        btnCreate.addEventListener('click', () => {
+            getPartialView(0);
+        });
+    }
 });
 
 function getPartialView(targetId) {

@@ -63,3 +63,54 @@ a:hover + .my-dropdown {
     background-color: #eee;
     text-decoration: none;
 }
+
+/**********************
+      CHECKBOX
+**********************/
+input[type=checkbox] {
+    display: none;
+}
+
+.my-checkbox-group {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+    .my-checkbox-group span {
+        margin-right: 0.3rem;
+    }
+
+        .my-checkbox-group span label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: ghostwhite;
+            border-radius: 2px;
+            border: 3px solid darkgrey;
+            border-style: double;
+        }
+
+    .my-checkbox-group label {
+        padding: 0 0 0.15rem 0;
+        margin: 0;
+        user-select: none;
+        -moz-user-select: none;
+    }
+
+        .my-checkbox-group label:hover {
+            cursor: pointer;
+        }
+
+    .my-checkbox-group input:checked ~ label::after {
+        content: "";
+        height: 1rem;
+        width: 0.4rem;
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        transform: rotate(40deg);
+    }

@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
 using RxTracker.Models;
 using RxTracker.ViewModels;
+using RxTracker.ViewModels.Transaction;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 /* Filter Transactions By: Date, Medication, Doctor, Pharmacy
@@ -94,7 +97,7 @@ namespace RxTracker.Controllers
             }
 
             // PREPARE THE DATA FOR THE VIEW WITH ASSOCIATED DATA FOR SELECT LISTS
-            var model = new ViewModels.Transaction.EditViewModel
+            var model = new EditViewModel
             {
                 Transaction = transaction,
                 Prescription = _context.Prescription
@@ -255,6 +258,130 @@ namespace RxTracker.Controllers
             transactionToEdit.InsuranceUsed = transaction.InsuranceUsed;
             transactionToEdit.DiscountUsed = transaction.DiscountUsed;
             return true;
+        }
+
+        public IActionResult Statistics()
+        {
+            Filters filters = new Filters
+            {
+                DateFrom = DateTime.Now.AddMonths(-3)
+            };
+
+            Statistics model = new Statistics
+            {
+                StatisticsList = GetStatistics(filters),
+                DrugList = _context.Drug
+                    .OrderBy(d => d.DisplayName)
+                    .Select(d => new SelectHelper
+                    {
+                        Value = d.DrugId,
+                        Text = d.DisplayName
+                    })
+                    .ToList(),
+                DoctorList = _context.Doctor
+                    .OrderBy(d => d.Name)
+                    .Select(d => new SelectHelper
+                    {
+                        Value = d.DoctorId,
+                        Text = d.Name
+                    })
+                    .ToList(),
+                PharmacyList = _context.Pharmacy
+                    .OrderBy(d => d.Name)
+                    .Select(d => new SelectHelper
+                    {
+                        Value = d.PharmacyId,
+                        Text = d.Name
+                    })
+                    .ToList()
+            };
+
+            var blank = new SelectHelper
+            {
+                Value = 0,
+                Text = ""
+            };
+            model.DrugList.Insert(0, blank);
+            model.DoctorList.Insert(0, blank);
+            model.PharmacyList.Insert(0, blank);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult GetStatisticsJson([FromBody]Filters filters)
+        {
+            List<Statistic> model = GetStatistics(filters);
+            return PartialView("_StatisticsPartial", model);
+        }
+
+
+        private List<Statistic> GetStatistics(Filters filters)
+        {
+            IQueryable<Transaction> statisticsQueryable = _context.Transaction
+               .Include(t => t.Pharmacy)
+               .Include(t => t.Prescription)
+                   .ThenInclude(p => p.Drug)
+               .Include(t => t.Prescription)
+                   .ThenInclude(p => p.Doctor);
+
+            if (filters != null)
+            {
+                if (!filters.IncludeInactive)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.Active);
+                }
+                
+                if (filters.DrugId != 0 && !filters.IncludeBrandedAndGeneric)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.DrugId == filters.DrugId);
+                }
+                if (filters.DrugId != 0 && filters.IncludeBrandedAndGeneric)
+                {
+                    statisticsQueryable = statisticsQueryable
+                        .Where(t => t.Prescription.DrugId == filters.DrugId || t.Prescription.Drug.GenericForId == filters.DrugId);
+                }
+                if (filters.DoctorId != 0)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.DoctorId == filters.DoctorId);
+                }
+                if (filters.PharmacyId != 0)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.PharmacyId == filters.PharmacyId);
+                }
+                if (filters.DateFrom.HasValue)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.DateFilled.Value.CompareTo(filters.DateFrom.Value) > 0);
+                }
+                if (filters.DateTo.HasValue)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.DateFilled.Value.CompareTo(filters.DateTo.Value) < 0);
+                }
+                if (filters.CostFrom.HasValue)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.Cost.Value > filters.CostFrom.Value);
+                }
+                if (filters.CostTo.HasValue)
+                {
+                    statisticsQueryable = statisticsQueryable.Where(t => t.Cost.Value < filters.CostTo.Value);
+                }
+            }
+
+            List<Statistic> statistics = statisticsQueryable
+               .OrderByDescending(t => t.DateFilled)
+               .Select(t => new Statistic
+               {
+                   DrugName = t.Prescription.Drug.DisplayName,
+                   Dosage = t.Prescription.Dosage,
+                   DoctorName = t.Prescription.Doctor.Name,
+                   PharmacyName = t.Pharmacy.Name,
+                   DateFilled = t.DateFilled.Value.ToShortDateString(),
+                   Cost = t.Cost.Value.ToString("C")
+               })
+               .AsNoTracking()
+               .ToList();
+            
+            return statistics;
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿@model List<RxTracker.ViewModels.Transaction.Statistic>
+
+<table class="table table-sm table-striped table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>Medication</th>
+      <th>Dosage</th>
+      <th>Doctor</th>
+      <th>Pharmacy</th>
+      <th>Date</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var transaction in Model)
+    {
+      <tr>
+        <td>@transaction.DrugName</td>
+        <td>@transaction.Dosage</td>
+        <td>@transaction.DoctorName</td>
+        <td>@transaction.PharmacyName</td>
+        <td>@transaction.DateFilled</td>
+        <td>@transaction.Cost</td>
+      </tr>
+    }
+  </tbody>
+</table>
