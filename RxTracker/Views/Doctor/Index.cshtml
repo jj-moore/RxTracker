@@ -4,8 +4,8 @@
   <input type="hidden" id="View" value="Doctor" />
   <button type="button" id="btnCreate" class="btn btn-primary">Add New Doctor</button>
   <div class="row">
-    <div class="col-5">
-      <table class="table table-sm table-striped table-hover table-responsive">
+    <div class="col-4 scroll">
+      <table class="table table-sm table-striped table-hover">
         <thead>
           <tr>
             <th>Doctor</th>
@@ -15,14 +15,15 @@
         <tbody id="listBody">
           @foreach (var drug in Model.DoctorList)
           {
-          <tr data-id="@drug.DoctorId">
-            <td>@drug.Name</td>
-            <td>@drug.Hospital</td>
-          </tr>
+            <tr data-id="@drug.DoctorId">
+              <td>@drug.Name</td>
+              <td>@drug.Hospital</td>
+            </tr>
           }
         </tbody>
       </table>
     </div>
-    <div id="partialView" class="col-7"></div>
+    <div class="col-1"></div>
+    <div id="partialView" class="col-5"></div>
   </div>
 </div>

@@ -4,8 +4,8 @@
   <input type="hidden" id="View" value="Transaction" />
   <button type="button" id="btnCreate" class="btn btn-primary">Add New Transaction</button>
   <div class="row">
-    <div class="col-5">
-      <table class="table table-sm table-striped table-hover table-responsive">
+    <div class="col-6 scroll">
+      <table class="table table-sm table-striped table-hover">
         <thead>
           <tr>
             <th>Medication</th>
@@ -16,15 +16,16 @@
         <tbody id="listBody">
           @foreach (var transaction in Model.TransactionList)
           {
-          <tr data-id="@transaction.TransactionId">
-            <td>@transaction.DrugDisplayName</td>
-            <td>@transaction.DateFilled</td>
-            <td>@transaction.Pharmacy</td>
-          </tr>
+            <tr data-id="@transaction.TransactionId">
+              <td>@transaction.DrugDisplayName</td>
+              <td>@transaction.DateFilled</td>
+              <td>@transaction.Pharmacy</td>
+            </tr>
           }
         </tbody>
       </table>
     </div>
-    <div id="partialView" class="col-7"></div>
+    <div class="col-1"></div>
+    <div id="partialView" class="col-5"></div>
   </div>
 </div>

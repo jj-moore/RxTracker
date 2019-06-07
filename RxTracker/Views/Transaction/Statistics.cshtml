@@ -1,96 +1,104 @@
 ﻿@model RxTracker.ViewModels.Transaction.Statistics
 <script src="~/js/Statistic.js" asp-append-version="true"></script>
 
-<div class="container">
-  <div class="row">
-    
-    <div class="col-4">
+<div class="container-fluid">
+  <div class="row mb-1">
+    <div class="col-3">
       <h3>Filter By</h3>
-
-      <div class="my-checkbox-group">
-        <span>
-          <input type="checkbox" id="includeInactive" />
-          <label for="includeInactive"></label>
-        </span>
-        <label for="includeInactive">Include Inactive</label>
       </div>
+    </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Medication</span>
+    <div class="row">
+
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Medication</span>
+          </div>
+          <select id="drugList" class="custom-select" asp-items="@(new SelectList(Model.DrugList, "Value", "Text"))"></select>
         </div>
-        <select id="drugList" class="custom-select" asp-items="@(new SelectList(Model.DrugList, "Value", "Text"))"></select>
-      </div>
-
-      <div class="my-checkbox-group">
-        <span>
-          <input type="checkbox" id="includeBrandedGeneric" />
-          <label for="includeBrandedGeneric"></label>
-        </span>
-        <label for="includeBrandedGeneric">Include Branded and Generic</label>
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Doctor</span>
+        <div class="my-checkbox-group">
+          <span>
+            <input type="checkbox" id="includeInactive" />
+            <label for="includeInactive"></label>
+          </span>
+          <label for="includeInactive">Include Inactive</label>
         </div>
-        <select id="doctorList" class="custom-select" asp-items="@(new SelectList(Model.DoctorList, "Value", "Text"))"></select>
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Pharmacy</span>
+        <div class="my-checkbox-group">
+          <span>
+            <input type="checkbox" id="includeBrandedGeneric" />
+            <label for="includeBrandedGeneric"></label>
+          </span>
+          <label for="includeBrandedGeneric">Include Branded and Generic</label>
         </div>
-        <select id="pharmacyList" class="custom-select" asp-items="@(new SelectList(Model.PharmacyList, "Value", "Text"))"></select>
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Date From</span>
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Doctor</span>
+          </div>
+          <select id="doctorList" class="custom-select" asp-items="@(new SelectList(Model.DoctorList, "Value", "Text"))"></select>
         </div>
-        <input type="date" id="dateFrom" class="form-control" value="@Model.DefaultDateFrom">
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Date To</span>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Pharmacy</span>
+          </div>
+          <select id="pharmacyList" class="custom-select" asp-items="@(new SelectList(Model.PharmacyList, "Value", "Text"))"></select>
         </div>
-        <input type="date" id="dateTo" class="form-control">
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Cost From $</span>
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Date From</span>
+          </div>
+          <input type="date" id="dateFrom" class="form-control" value="@Model.DefaultDateFrom">
         </div>
-        <input type="number" id="costFrom" class="form-control">
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Cost To $</span>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Cost From $</span>
+          </div>
+          <input type="number" id="costFrom" class="form-control">
         </div>
-        <input type="number" id="costTo" class="form-control">
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Sort By</span>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Sort By</span>
+          </div>
+          <select id="sortBy" class="custom-select" asp-for="DefaultSort" asp-items="Model.SortList"></select>
         </div>
-        <select id="sortBy" class="custom-select" asp-for="DefaultSort" asp-items="Model.SortList"></select>
       </div>
 
-      <div class="my-checkbox-group">
-        <span>
-          <input type="checkbox" id="sortDescending" checked />
-          <label for="sortDescending"></label>
-        </span>
-        <label for="sortDescending">Sort Descending</label>
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Date To</span>
+          </div>
+          <input type="date" id="dateTo" class="form-control">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Cost To $</span>
+          </div>
+          <input type="number" id="costTo" class="form-control">
+        </div>
+        <div class="my-checkbox-group">
+          <span>
+            <input type="checkbox" id="sortDescending" checked />
+            <label for="sortDescending"></label>
+          </span>
+          <label for="sortDescending">Sort Descending</label>
+        </div>
       </div>
 
     </div>
 
-    <div id="partialView" class="col-8"><partial name="_StatisticsPartial" model="Model.StatisticsList" />
-
+    <div class="row mt-2">
+      <div class="col-12">
+        <div id="partialView" class="scroll2">
+          <partial name="_StatisticsPartial" model="Model.StatisticsList" />
+        </div>
+      </div>
     </div>
+
   </div>
-</div>

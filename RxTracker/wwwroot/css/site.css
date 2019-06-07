@@ -42,6 +42,43 @@ img {
     border-bottom-right-radius: 5px !important;
 }
 
+.scroll {
+    max-height: 65vh;
+    overflow-y: auto;
+}
+.scroll2 {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+th {
+    position: sticky;
+    top: 0px;
+    background-color: ghostwhite;
+    color: var(--header-text);
+    border: none;
+}
+
+.selected {
+    background-color: green !important;
+    color: ghostwhite;
+}
+    .selected:hover {
+        color: ghostwhite !important;
+    }
+
+#btnCreate {
+    margin-bottom: 1rem;
+}
+
+td {
+    padding-right: 1rem !important;
+}
+
+label.nav-link {
+    padding-top: 9px;
+}
+
 /**********************
     DROPDOWN LINKS
 **********************/

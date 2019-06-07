@@ -3,10 +3,7 @@
     if (listBody) {
         const rows = listBody.querySelectorAll('tr');
         rows.forEach(row => {
-            row.addEventListener('click', e => {
-                const targetId = e.target.parentElement.dataset.id;
-                getPartialView(targetId);
-            })
+            row.addEventListener('click', updateDetails);
         });
     }
 
@@ -17,6 +14,21 @@
         });
     }
 });
+
+function updateDetails(event) {
+    const targetId = event.target.parentElement.dataset.id;
+    const listBody = document.getElementById('listBody');
+    let i = listBody.rows.length;
+    while (--i >= 0) {
+        if (listBody.rows[i].dataset.id == targetId) {
+            listBody.rows[i].classList.add('selected');
+        } else {
+
+            listBody.rows[i].classList.remove('selected');
+        }
+    }
+    getPartialView(targetId);
+}
 
 function getPartialView(targetId) {
     const controller = document.getElementById('View').value;
