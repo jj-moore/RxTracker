@@ -18,6 +18,7 @@ namespace RxTracker.ViewModels
     public class DashboardViewModel
     { 
         public List<DashboardRecord> Dashboard { get; set; }
+        public string PriorMonthCost { get; set; }
 
         public DashboardViewModel()
         {

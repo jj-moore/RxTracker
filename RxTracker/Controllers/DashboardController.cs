@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
 using RxTracker.Models;
 using RxTracker.ViewModels;
+using System;
 using System.Linq;
 
 namespace RxTracker.Controllers
@@ -20,7 +21,6 @@ namespace RxTracker.Controllers
             _context = context;
             _userManager = userManager;
         }
-
 
         /// <summary>
         /// This is the landing page after a user authenticates. It displays a summary of
@@ -40,7 +40,15 @@ namespace RxTracker.Controllers
                  .GroupBy(p => p.Prescription.DrugId)
                  .AsNoTracking();
 
-            DashboardViewModel model = new DashboardViewModel();
+            var priorMonthCost = _context.Transaction
+                    .Where(t => DateTime.Now.AddMonths(-1).CompareTo(t.DateFilled) < 0)
+                    .Select(t => t.Cost)
+                    .Sum() ?? 0;
+
+            DashboardViewModel model = new DashboardViewModel
+            {
+                PriorMonthCost = priorMonthCost.ToString("C")
+            };
 
             foreach (var group in groups)
             {
@@ -63,6 +71,20 @@ namespace RxTracker.Controllers
 
             model.Dashboard = model.Dashboard.OrderBy(d => d.LastFilled).ToList();
             return View(model);
+        }
+
+        public IActionResult GetCost(int months)
+        {
+
+            var priorMonthCost = _context.Transaction
+                    .Where(t => DateTime.Now.AddMonths(months * -1).CompareTo(t.DateFilled) < 0)
+                    .Select(t => t.Cost)
+                    .Sum() ?? 0;
+
+            return Json(new
+            {
+                cost = priorMonthCost.ToString("C")
+            });
         }
     }
 }

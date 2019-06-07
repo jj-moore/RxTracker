@@ -13,6 +13,11 @@
             getPartialView(0);
         });
     }
+
+    const monthCost = document.getElementById('monthCost');
+    if (monthCost) {
+        monthCost.addEventListener('change', updateCost);
+    }
 });
 
 function updateDetails(event) {
@@ -71,12 +76,18 @@ function getPartialView(targetId) {
                 })
             }
 
-            document.getElementById('btnSave').addEventListener('click', saveRecord);
+            const btnSave = document.getElementById('btnSave');
+            if (btnSave) {
+                btnSave.addEventListener('click', saveRecord);
+            }
             document.getElementById('btnDelete').addEventListener('click', deleteRecord);
         })
         .catch(error => {
             console.error(error);
         });
+
+
+
 }
 
 function saveRecord() {
@@ -151,6 +162,21 @@ function deleteRecord() {
             const listBody = document.getElementById('listBody');
             const deleteTr = listBody.querySelector(`[data-id="${data}"`);
             deleteTr.parentElement.removeChild(deleteTr);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function updateCost(event) {
+    const months = event.target.value;
+    console.log(months);
+    const url = `/Dashboard/GetCost?months=${months}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            document.getElementById('monthAmount').innerText = json.cost;
         })
         .catch(error => {
             console.error(error);

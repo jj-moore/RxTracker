@@ -40,7 +40,8 @@ namespace RxTracker.Controllers
             ListViewModel model = new ListViewModel
             {
                 PrescriptionList = _context.Prescription
-                    .Where(p => p.Active && p.User == user)
+                    //.Where(p => p.Active && p.User == user)
+                    .Where(p => p.User == user)
                     .Include(p => p.Drug)
                     .Include(p => p.Doctor)
                     .Select(p => new PrescriptionListItem
@@ -107,19 +108,7 @@ namespace RxTracker.Controllers
                     })
                    .ToList(),
             };
-
-            // INSERT BLANK VALUES FOR THE SELECT LISTS
-            model.Doctors.Insert(0, new SelectHelper
-            {
-                Value = 0,
-                Text = ""
-            });
-            model.Drugs.Insert(0, new SelectHelper
-            {
-                Value = 0,
-                Text = ""
-            });
-
+            
             // GENERATE THE HTML AND RETURN
             return PartialView("_PrescriptionPartial", model);
         }

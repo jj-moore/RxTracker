@@ -2,7 +2,7 @@
 
 <form asp-action="Edit">
   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-  <input type="hidden" asp-for="Prescription.PrescriptionId" />
+  <input type="hidden" asp-for="Prescription.PrescriptionId" id="recordId" />
 
   <div class="form-group">
     <label asp-for="Prescription.DoctorId" class="control-label"></label>

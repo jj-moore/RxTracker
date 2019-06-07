@@ -10,11 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-/*
-All Current Prescriptions
-Total Cost By: Date, Medication, Doctor, Pharmacy 
-*/
-
 namespace RxTracker.Controllers
 {
     public class TransactionController : Controller
@@ -50,6 +45,7 @@ namespace RxTracker.Controllers
                     .Include(t => t.Pharmacy)
                     .Include(t => t.Prescription)
                         .ThenInclude(p => p.Drug)
+                    .OrderByDescending(t => t.DateFilled)
                     .Select(t => new TransactionListItem
                     {
                         TransactionId = t.TransactionId,
@@ -57,9 +53,9 @@ namespace RxTracker.Controllers
                         DrugDisplayName = t.Prescription.Drug.DisplayName,
                         Pharmacy = t.Pharmacy.Name
                     })
-                    .OrderBy(t => t.DateFilled)
                     .ToList()
             };
+            
 
             // GENERATE THE HTML AND RETURN TO THE BROWSER
             return View(model);
@@ -164,7 +160,7 @@ namespace RxTracker.Controllers
                 return View("Error");
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -234,6 +230,7 @@ namespace RxTracker.Controllers
             // QUERY THE DATABASE TO FIND THE TRANSACTION AND THE RELATED PRESCRIPTION
             Transaction transactionToEdit = _context.Transaction
                .Include(t => t.Prescription)
+               .Include(t => t.Pharmacy)
                 .FirstOrDefault(t => t.TransactionId == transaction.TransactionId);
 
             // IF THE TRANSACTION IS NOT FOUND OR IS NOT ASSOCIATED WITH THIS USER RETURN FALSE
@@ -246,7 +243,7 @@ namespace RxTracker.Controllers
             transactionToEdit.PrescriptionId = transaction.PrescriptionId;
             transactionToEdit.PharmacyId = transaction.PharmacyId;
             transactionToEdit.DateFilled = transaction.DateFilled;
-            transactionToEdit.Cost = transaction.Cost;
+            transactionToEdit.Cost = transaction.Cost.Value;
             transactionToEdit.InsuranceUsed = transaction.InsuranceUsed;
             transactionToEdit.DiscountUsed = transaction.DiscountUsed;
             return true;
@@ -353,7 +350,7 @@ namespace RxTracker.Controllers
                     drugIdList.AddRange(_context.Drug
                         .Where(d => d.GenericForId.HasValue && d.GenericForId == filters.DrugId)
                         .Select(d => d.DrugId));
-                    
+
                     statisticsQueryable = statisticsQueryable
                         .Where(t => drugIdList.Contains(t.Prescription.DrugId));
                 }

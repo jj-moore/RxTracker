@@ -2,7 +2,7 @@
 
 <form asp-action="Edit">
   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-  <input type="hidden" asp-for="Transaction.TransactionId" />
+  <input type="hidden" id="recordId" asp-for="Transaction.TransactionId" />
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
@@ -33,7 +33,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">Cost</span>
     </div>
-    <input type="number" asp-for="Transaction.Cost" class="form-control" />
+    <input type="number" asp-for="Transaction.Cost" class="form-control" step=".01"/>
     <span asp-validation-for="Transaction.Cost" class="text-danger"></span>
   </div>
 

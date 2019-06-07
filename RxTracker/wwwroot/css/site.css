@@ -79,6 +79,10 @@ label.nav-link {
     padding-top: 9px;
 }
 
+#monthCost {
+    width: 4rem;
+}
+
 /**********************
     DROPDOWN LINKS
 **********************/
