@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RxTracker.ViewModels.Transaction
 {
@@ -11,5 +10,8 @@ namespace RxTracker.ViewModels.Transaction
         public List<SelectHelper> DrugList { get; set; }
         public List<SelectHelper> DoctorList { get; set; }
         public List<SelectHelper> PharmacyList { get; set; }
+        public List<SelectListItem> SortList { get; set; }
+        public string DefaultSort { get; set; }
+        public string DefaultDateFrom { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RxTracker.Data;
 using RxTracker.Models;
@@ -9,9 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-/* Filter Transactions By: Date, Medication, Doctor, Pharmacy
+/*
 All Current Prescriptions
-Total Cost By: Date, Medication, Doctor, Pharmacy */
+Total Cost By: Date, Medication, Doctor, Pharmacy 
+*/
 
 namespace RxTracker.Controllers
 {
@@ -41,14 +43,14 @@ namespace RxTracker.Controllers
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
 
             // QUERY THE DATABASE FOR THE INFORMATION REQUIRED TO POPULATE THE LIST
-            var model = new ViewModels.Transaction.ListViewModel
+            var model = new ListViewModel
             {
                 TransactionList = _context.Transaction
                     .Where(t => t.Prescription.User == user)
                     .Include(t => t.Pharmacy)
                     .Include(t => t.Prescription)
                         .ThenInclude(p => p.Drug)
-                    .Select(t => new ViewModels.Transaction.TransactionListItem
+                    .Select(t => new TransactionListItem
                     {
                         TransactionId = t.TransactionId,
                         DateFilled = t.DateFilled.HasValue ? t.DateFilled.Value.ToShortDateString() : null,
@@ -264,7 +266,9 @@ namespace RxTracker.Controllers
         {
             Filters filters = new Filters
             {
-                DateFrom = DateTime.Now.AddMonths(-3)
+                DateFrom = DateTime.Now.AddMonths(-3),
+                SortBy = "DateFilled",
+                SortDescending = true
             };
 
             Statistics model = new Statistics
@@ -293,7 +297,17 @@ namespace RxTracker.Controllers
                         Value = d.PharmacyId,
                         Text = d.Name
                     })
-                    .ToList()
+                    .ToList(),
+                SortList = new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "DrugName", Text = "Medication" },
+                    new SelectListItem { Value = "DoctorName", Text = "Doctor" },
+                    new SelectListItem { Value = "PharmacyName", Text = "Pharmacy" },
+                    new SelectListItem { Value = "DateFilled", Text = "Date" },
+                    new SelectListItem { Value = "Cost", Text = "Cost" },
+                },
+                DefaultSort = "DateFilled",
+                DefaultDateFrom = DateTime.Now.AddMonths(-3).ToString("yyyy-MM-dd")
             };
 
             var blank = new SelectHelper
@@ -304,6 +318,8 @@ namespace RxTracker.Controllers
             model.DrugList.Insert(0, blank);
             model.DoctorList.Insert(0, blank);
             model.PharmacyList.Insert(0, blank);
+
+
 
             return View(model);
         }
@@ -331,7 +347,7 @@ namespace RxTracker.Controllers
                 {
                     statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.Active);
                 }
-                
+
                 if (filters.DrugId != 0 && !filters.IncludeBrandedAndGeneric)
                 {
                     statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.DrugId == filters.DrugId);
@@ -367,8 +383,61 @@ namespace RxTracker.Controllers
                 }
             }
 
+            switch (filters.SortBy)
+            {
+                case "DrugName":
+                    if (filters.SortDescending)
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Prescription.Drug.DisplayName);
+                    }
+                    else
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Prescription.Drug.DisplayName);
+                    }
+                    break;
+                case "DoctorName":
+                    if (filters.SortDescending)
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Prescription.Doctor.Name);
+                    }
+                    else
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Prescription.Doctor.Name);
+                    }
+                    break;
+                case "PharmacyName":
+                    if (filters.SortDescending)
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Pharmacy.Name);
+                    }
+                    else
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Pharmacy.Name);
+                    }
+                    break;
+                case "DateFilled":
+                    if (filters.SortDescending)
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.DateFilled);
+                    }
+                    else
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.DateFilled);
+                    }
+                    break;
+                case "Cost":
+                    if (filters.SortDescending)
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Cost);
+                    }
+                    else
+                    {
+                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Cost);
+                    }
+                    break;
+            }
+
             List<Statistic> statistics = statisticsQueryable
-               .OrderByDescending(t => t.DateFilled)
                .Select(t => new Statistic
                {
                    DrugName = t.Prescription.Drug.DisplayName,
@@ -380,7 +449,7 @@ namespace RxTracker.Controllers
                })
                .AsNoTracking()
                .ToList();
-            
+
             return statistics;
         }
     }

@@ -8,6 +8,8 @@
     document.getElementById('dateTo').addEventListener('blur', updateStatistics);
     document.getElementById('costFrom').addEventListener('blur', updateStatistics);
     document.getElementById('costTo').addEventListener('blur', updateStatistics);
+    document.getElementById('sortBy').addEventListener('change', updateStatistics);
+    document.getElementById('sortDescending').addEventListener('click', updateStatistics);
 });
 
 function updateStatistics() {
@@ -41,6 +43,9 @@ function getFilters() {
     filters.costTo = document.getElementById('costTo').value;
     filters.includeInactive = document.getElementById('includeInactive').checked ? true : false;
     filters.includeBrandedAndGeneric = document.getElementById('includeBrandedGeneric').checked ? true : false;
+    const sortBy = document.getElementById('sortBy');
+    filters.sortBy = sortBy.options[sortBy.selectedIndex].value;
+    filters.sortDescending = document.getElementById('sortDescending').checked ? true : false;
 
     const data = JSON.stringify(filters);
     return data;
