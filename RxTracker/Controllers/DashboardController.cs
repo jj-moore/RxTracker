@@ -36,7 +36,7 @@ namespace RxTracker.Controllers
                      .ThenInclude(p => p.Doctor)
                  .Include(t => t.Prescription)
                      .ThenInclude(p => p.Drug)
-                 .Where(t => t.Prescription.User == user)
+                 .Where(t => t.Prescription.User == user && t.Prescription.Active)
                  .GroupBy(p => p.Prescription.DrugId)
                  .AsNoTracking();
 
@@ -60,6 +60,8 @@ namespace RxTracker.Controllers
                     });
                 }
             }
+
+            model.Dashboard = model.Dashboard.OrderBy(d => d.LastFilled).ToList();
             return View(model);
         }
     }

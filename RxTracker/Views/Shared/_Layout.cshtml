@@ -40,6 +40,9 @@
               }
             </li>
             <li class="nav-item">
+              <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </li>
             @if (User.Identity.IsAuthenticated)
@@ -52,6 +55,7 @@
                   <a asp-controller="Pharmacy" asp-action="Index" class="my-dropdown-item function-links">Manage Pharmacies</a>
                   <a asp-controller="Prescription" asp-action="Index" class="my-dropdown-item function-links">Manage Prescriptions</a>
                   <a asp-controller="Transaction" asp-action="Index" class="my-dropdown-item function-links">Enter Transactions</a>
+                  <a asp-controller="Transaction" asp-action="Statistics" class="my-dropdown-item function-links">View Statistics</a>
                 </div>
               </li>
             }

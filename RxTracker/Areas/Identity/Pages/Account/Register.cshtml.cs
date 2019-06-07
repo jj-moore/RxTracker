@@ -66,12 +66,10 @@ namespace RxTracker.Areas.Identity.Pages.Account
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-            [Required]
             [StringLength(20)]
             [Display(Name = "Phone No.")]
             public string PhoneNumber { get; set; }
 
-            [Required]
             [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
             public string DOB { get; set; }

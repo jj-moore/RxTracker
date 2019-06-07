@@ -1,29 +1,50 @@
 ﻿@model DashboardViewModel
 
 <div class="container">
-  <h2 class="text-center mt-5">Welcome!</h2>
-  <p class="mt-5 text-center">Here are the details for last refill of each drug!</p>
-  <table class="table table-hover table-sm mt-1">
-    <thead>
-      <tr>
-        <th>Medication</th>
-        <th>Doctor</th>
-        <th>Pharmacy</th>
-        <th>Last Filled</th>
-        <th>Last Cost</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var record in Model.Dashboard)
-      {
-        <tr>
-          <td>@record.DrugDisplayName</td>
-          <td>@record.DoctorName</td>
-          <td>@record.PharmacyName</td>
-          <td>@record.LastFilled</td>
-          <td>@record.LastCost</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-8">
+      <h2 class="text-center mt-3">Your Dashboard</h2>
+      <h5 class="mt-4 text-center">Here is when you last filled each active prescription!</h5>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-8">
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th>Medication</th>
+            <th>Doctor</th>
+            <th>Pharmacy</th>
+            <th>Last Filled</th>
+            <th>Last Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var record in Model.Dashboard)
+          {
+            <tr>
+              <td>@record.DrugDisplayName</td>
+              <td>@record.DoctorName</td>
+              <td>@record.PharmacyName</td>
+              <td>@record.LastFilled</td>
+              <td>@record.LastCost</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <h5>&nbsp;I would like to ...</h5>
+      <div class="list-group list-group-flush my-list-group">
+        <a asp-controller="Transaction" class="list-group-item list-group-item-action list-first">Enter the cost of a refill</a>
+        <a asp-controller="Prescription" class="list-group-item list-group-item-action">Manage my prescriptions</a>
+        <a asp-controller="Transaction" asp-action="Statistics" class="list-group-item list-group-item-action">View statistics on my prescriptions</a>
+        <a asp-controller="Drug" class="list-group-item list-group-item-action">Manage my list of medications I take</a>
+        <a asp-controller="Doctor" class="list-group-item list-group-item-action">Manage the list of doctors I see</a>
+        <a asp-controller="Pharmacy" class="list-group-item list-group-item-action list-last">Manage the list of pharmacies I visit</a>
+      </div>
+    </div>
+  </div>
 </div>

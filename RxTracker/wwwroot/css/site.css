@@ -1,10 +1,14 @@
-﻿body {
+﻿html {
+    height: 100vh;
+}
+
+body {
     background-image: linear-gradient(to bottom right, lightskyblue, ghostwhite);
     height: 100vh;
 }
 
 .main-content {
-    height: 90vh;
+    height: 88vh;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -13,6 +17,29 @@
 
 footer .container {
     text-align: center;
+}
+
+img {
+    border-radius: 5px;
+}
+
+.header {
+    margin-bottom: 8vh;
+}
+
+.list-group-item {
+    padding: 0.5rem 0.75rem;
+    color: blue;
+}
+
+.list-first {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+.list-last {
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 
 /**********************
