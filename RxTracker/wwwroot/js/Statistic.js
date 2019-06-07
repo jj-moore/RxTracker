@@ -14,9 +14,8 @@
 
 function updateStatistics() {
     const data = getFilters();
-    console.log(data);
-
     const url = '/Transaction/GetStatisticsJson';
+
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -26,6 +25,9 @@ function updateStatistics() {
         .then(text => {
             document.getElementById('partialView').innerHTML = text;
         })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
 function getFilters() {

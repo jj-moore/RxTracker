@@ -354,8 +354,18 @@ namespace RxTracker.Controllers
                 }
                 if (filters.DrugId != 0 && filters.IncludeBrandedAndGeneric)
                 {
+                    List<int> drugIdList = new List<int> { filters.DrugId };
+                    int? genericForId = _context.Drug.Find(filters.DrugId).GenericForId;
+                    if (genericForId.HasValue)
+                    {
+                        drugIdList.Add(genericForId.Value);
+                    }
+                    drugIdList.AddRange(_context.Drug
+                        .Where(d => d.GenericForId.HasValue && d.GenericForId == filters.DrugId)
+                        .Select(d => d.DrugId));
+                    
                     statisticsQueryable = statisticsQueryable
-                        .Where(t => t.Prescription.DrugId == filters.DrugId || t.Prescription.Drug.GenericForId == filters.DrugId);
+                        .Where(t => drugIdList.Contains(t.Prescription.DrugId));
                 }
                 if (filters.DoctorId != 0)
                 {
