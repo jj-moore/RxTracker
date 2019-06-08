@@ -100,13 +100,13 @@ namespace RxTracker.Controllers
                 Transaction = transaction,
                 Prescription = _context.Prescription
                     .Include(p => p.Drug)
-                    .Where(p => p.User == user)
+                    .Where(p => p.User == user && p.Active)
                     .Select(p => new SelectHelper
                     {
                         Value = p.PrescriptionId,
                         Text = p.Drug.DisplayName
                     })
-                    .OrderBy(p => p.Value)
+                    .OrderBy(p => p.Text)
                     .ToList(),
                 Pharmacy = _context.Pharmacy
                     .Where(p => p.User == user)
@@ -115,7 +115,7 @@ namespace RxTracker.Controllers
                         Value = p.PharmacyId,
                         Text = p.Name
                     })
-                    .OrderBy(p => p.Value)
+                    .OrderBy(p => p.Text)
                     .ToList(),
             };
 

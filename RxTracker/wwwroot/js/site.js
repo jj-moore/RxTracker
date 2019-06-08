@@ -49,11 +49,8 @@ function getPartialView(targetId) {
             if (controller == 'Drug') {
                 const tradeNameElement = document.getElementById('Drug_TradeName');
                 const genericForElement = document.getElementById('Drug_GenericForId');
-                if (tradeNameElement.value) {
-                    genericForElement.disabled = true;
-                } else if (genericForElement.value) {
-                    tradeNameElement.disabled = true;
-                }
+                tradeNameElement.disabled = genericForElement.value != 0;
+                genericForElement.disabled = tradeNameElement.value;
 
                 tradeNameElement.addEventListener('blur', event => {
                     console.log(event.target);

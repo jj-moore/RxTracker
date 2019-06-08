@@ -11,12 +11,10 @@
       <h5 class="mt-4 text-center">Here is when you last filled each active prescription!</h5>
     </div>
 
-    <div class="col-md-4 mt-3">
-      <p>
-        You've spent <span id="monthAmount">@Model.PriorMonthCost</span> in the
-        <input type="number" id="monthCost" value="1" />
-        month(s)
-      </p>
+    <div class="col-md-4 mt-2">
+      <p class="text-center mb-2">
+        You've spent <span id="monthAmount">@Model.PriorMonthCost</span></p>
+        <p class="text-center">in the last <input type="number" id="monthCost" value="1" /> month(s)</p>
     </div>
   </div>
 </div>
@@ -54,7 +52,7 @@
       <a asp-controller="Transaction" class="list-group-item list-group-item-action">&nbsp;Enter the cost of a refill</a>
       <a asp-controller="Prescription" class="list-group-item list-group-item-action">&nbsp;Manage my prescriptions</a>
       <a asp-controller="Transaction" asp-action="Statistics" class="list-group-item list-group-item-action">&nbsp;View statistics on my prescriptions</a>
-      <a asp-controller="Drug" class="list-group-item list-group-item-action">&nbsp;Manage my list of medications I take</a>
+      <a asp-controller="Drug" class="list-group-item list-group-item-action">&nbsp;Manage the list of medications I take</a>
       <a asp-controller="Doctor" class="list-group-item list-group-item-action">&nbsp;Manage the list of doctors I see</a>
       <a asp-controller="Pharmacy" class="list-group-item list-group-item-action list-last">&nbsp;Manage the list of pharmacies I visit</a>
     </div>

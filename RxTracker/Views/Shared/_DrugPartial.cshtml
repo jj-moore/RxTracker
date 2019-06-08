@@ -1,30 +1,43 @@
 ﻿@model  RxTracker.ViewModels.Drug.DetailViewModel
 
-  <form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Drug.DrugId" id="recordId" />
-    <div class="form-group">
-      <label asp-for="Drug.Name" class="control-label"></label>
-      <input asp-for="Drug.Name" class="form-control" />
-      <span asp-validation-for="Drug.Name" class="text-danger"></span>
+<form asp-action="Edit">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <input type="hidden" asp-for="Drug.DrugId" id="recordId" />
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Medication Name</span>
     </div>
-    <div class="form-group">
-      <label asp-for="Drug.Manufacturer" class="control-label"></label>
-      <input asp-for="Drug.Manufacturer" class="form-control" />
-      <span asp-validation-for="Drug.Manufacturer" class="text-danger"></span>
+    <input asp-for="Drug.Name" class="form-control" />
+    <span asp-validation-for="Drug.Name" class="text-danger"></span>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Brand Name</span>
     </div>
-    <div class="form-group">
-      <label asp-for="Drug.TradeName" class="control-label"></label>
-      <input asp-for="Drug.TradeName" class="form-control" />
-      <span asp-validation-for="Drug.TradeName" class="text-danger"></span>
+    <input asp-for="Drug.TradeName" class="form-control" />
+    <span asp-validation-for="Drug.TradeName" class="text-danger"></span>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Manufacturer</span>
     </div>
-    <div class="form-group">
-      <label asp-for="Drug.GenericForId" class="control-label"></label>
-      <select asp-for="Drug.GenericForId" class="form-control" asp-items="@(new SelectList(Model.GenericFor, "Value", "Text"))"></select>
-      <span asp-validation-for="Drug.GenericForId" class="text-danger"></span>
+    <input asp-for="Drug.Manufacturer" class="form-control" />
+    <span asp-validation-for="Drug.Manufacturer" class="text-danger"></span>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Generic For</span>
     </div>
-    <div class="form-group">
-      <input type="submit" id="btnSave" class="btn btn-primary" value="Save" />
-      <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
-    </div>
-  </form>
+    <select asp-for="Drug.GenericForId" class="form-control" asp-items="@(new SelectList(Model.GenericFor, "Value", "Text"))"></select>
+    <span asp-validation-for="Drug.GenericForId" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" id="btnSave" class="btn btn-primary" value="Save" />
+    <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
+  </div>
+</form>

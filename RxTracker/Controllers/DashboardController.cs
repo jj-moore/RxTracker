@@ -41,6 +41,8 @@ namespace RxTracker.Controllers
                  .AsNoTracking();
 
             var priorMonthCost = _context.Transaction
+                    .Include(t => t.Prescription)
+                    .Where(t => t.Prescription.User == user)
                     .Where(t => DateTime.Now.AddMonths(-1).CompareTo(t.DateFilled) < 0)
                     .Select(t => t.Cost)
                     .Sum() ?? 0;
@@ -75,8 +77,9 @@ namespace RxTracker.Controllers
 
         public IActionResult GetCost(int months)
         {
-
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var priorMonthCost = _context.Transaction
+                    .Where(t => t.Prescription.User == user)
                     .Where(t => DateTime.Now.AddMonths(months * -1).CompareTo(t.DateFilled) < 0)
                     .Select(t => t.Cost)
                     .Sum() ?? 0;

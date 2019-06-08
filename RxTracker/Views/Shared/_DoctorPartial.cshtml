@@ -1,25 +1,35 @@
 ﻿@model RxTracker.Models.Doctor
 
-  <form id="myForm" asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="DoctorId" id="recordId" />
-    <div class="form-group">
-      <label asp-for="Name" class="control-label"></label>
-      <input asp-for="Name" class="form-control" />
-      <span asp-validation-for="Name" class="text-danger"></span>
-    </div>  
-    <div class="form-group">
-      <label asp-for="Hospital" class="control-label"></label>
-      <input asp-for="Hospital" class="form-control" />
-      <span asp-validation-for="Hospital" class="text-danger"></span>
+<form id="myForm" asp-action="Edit">
+  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <input type="hidden" asp-for="DoctorId" id="recordId" />
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Name</span>
     </div>
-    <div class="form-group">
-      <label asp-for="Address" class="control-label"></label>
-      <input asp-for="Address" class="form-control" />
-      <span asp-validation-for="Address" class="text-danger"></span>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Hospital</span>
     </div>
-    <div class="form-group">
-      <input type="button" id="btnSave" class="btn btn-primary" value="Save"  />
-      <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
+    <input asp-for="Hospital" class="form-control" />
+    <span asp-validation-for="Hospital" class="text-danger"></span>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Address</span>
     </div>
-  </form>
+    <input asp-for="Address" class="form-control" />
+    <span asp-validation-for="Address" class="text-danger"></span>
+  </div>
+
+  <div class="form-group">
+    <input type="button" id="btnSave" class="btn btn-primary" value="Save" />
+    <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
+  </div>
+</form>

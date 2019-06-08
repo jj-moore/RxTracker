@@ -6,7 +6,7 @@
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">Medication</span>
+      <span class="input-group-text" id="basic-addon1">Prescription</span>
     </div>
     <select asp-for="Transaction.PrescriptionId" class="form-control" asp-items="@(new SelectList(Model.Prescription, "Value", "Text"))"></select>
     <span asp-validation-for="Transaction.PrescriptionId" class="text-danger"></span>
@@ -49,8 +49,8 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">Discounts Used</span>
     </div>
-    <input asp-for="Transaction.InsuranceUsed" class="form-control" />
-    <span asp-validation-for="Transaction.InsuranceUsed" class="text-danger"></span>
+    <input asp-for="Transaction.DiscountUsed" class="form-control" />
+    <span asp-validation-for="Transaction.DiscountUsed" class="text-danger"></span>
   </div>
 
   <div class="form-group">
