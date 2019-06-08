@@ -23,8 +23,9 @@ namespace RxTracker.Controllers
         }
 
         /// <summary>
-        /// This is the landing page after a user authenticates. It displays a summary of
-        /// the last transaction for all active prescriptions.
+        /// This is the landing page after a user authenticates. It queries the database
+        /// the information required to display a summary of the last transaction for all 
+        /// active prescriptions and total cost over the last month.
         /// </summary>
         /// <returns>A web page with a summary of active prescriptions</returns>
         public IActionResult Index()
@@ -75,6 +76,11 @@ namespace RxTracker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Called by JavaScript to update the cost for x number of months.
+        /// </summary>
+        /// <param name="months">The number of months to include in the cost calculation</param>
+        /// <returns>A JSON formatted string of the cost</returns>
         public IActionResult GetCost(int months)
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;

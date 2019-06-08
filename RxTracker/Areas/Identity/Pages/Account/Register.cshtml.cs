@@ -80,6 +80,12 @@ namespace RxTracker.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+        /// <summary>
+        /// When the user registers, a new user is created in the database and
+        /// the user is logged in and redirected to the Dashboard.
+        /// </summary>
+        /// <param name="returnUrl">The url to return the user to</param>
+        /// <returns>Redirects the user to the Dashboard after registering them.</returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");

@@ -65,7 +65,14 @@ namespace RxTracker.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+        
+        /// <summary>
+        /// When the clicks login, their userId and Password are submitted. This method
+        /// compares the credentials to those persisted and logs them in or reloads the page
+        /// with an error message.
+        /// </summary>
+        /// <param name="returnUrl">The url to return the user to after authentication</param>
+        /// <returns>Either the Dashboard view or redisplays the loging</returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/Dashboard");
