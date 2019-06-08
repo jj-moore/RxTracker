@@ -7,6 +7,7 @@ namespace RxTracker.ViewModels.Statistics
 {
     public class Statistic
     {
+        public int TransactionId { get; set; }
         public string DrugName { get; set; }
         public string Dosage { get; set; }
         public string DoctorName { get; set; }

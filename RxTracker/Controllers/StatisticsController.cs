@@ -11,6 +11,7 @@ using RxTracker.Data;
 using RxTracker.Models;
 using RxTracker.ViewModels;
 using RxTracker.ViewModels.Statistics;
+using RxTracker.ExtensionMethods;
 
 namespace RxTracker.Controllers
 {
@@ -19,6 +20,7 @@ namespace RxTracker.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<MyUser> _userManager;
+        private decimal _totalCost;
 
         public StatisticsController(ApplicationDbContext context, UserManager<MyUser> userManager)
         {
@@ -70,9 +72,10 @@ namespace RxTracker.Controllers
                     new SelectListItem { Value = "DateFilled", Text = "Date" },
                     new SelectListItem { Value = "Cost", Text = "Cost" },
                 },
-                DefaultSort = "DateFilled",
-                DefaultDateFrom = DateTime.Now.AddMonths(-3).ToString("yyyy-MM-dd")
+                DefaultSort = "DateFilled"
             };
+
+            model.TotalCost = _totalCost.ToString("C");
 
             var blank = new SelectHelper
             {
@@ -103,115 +106,18 @@ namespace RxTracker.Controllers
                .Include(t => t.Prescription)
                    .ThenInclude(p => p.Doctor);
 
-            if (filters != null)
-            {
-                if (!filters.IncludeInactive)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.Active);
-                }
+            statisticsQueryable = statisticsQueryable.FilterStatistics(_context, filters);
+            statisticsQueryable = statisticsQueryable.SortStatistics(filters.SortBy, filters.SortDescending);
 
-                if (filters.DrugId != 0 && !filters.IncludeBrandedAndGeneric)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.DrugId == filters.DrugId);
-                }
-                if (filters.DrugId != 0 && filters.IncludeBrandedAndGeneric)
-                {
-                    List<int> drugIdList = new List<int> { filters.DrugId };
-                    int? genericForId = _context.Drug.Find(filters.DrugId).GenericForId;
-                    if (genericForId.HasValue)
-                    {
-                        drugIdList.Add(genericForId.Value);
-                    }
-                    drugIdList.AddRange(_context.Drug
-                        .Where(d => d.GenericForId.HasValue && d.GenericForId == filters.DrugId)
-                        .Select(d => d.DrugId));
-
-                    statisticsQueryable = statisticsQueryable
-                        .Where(t => drugIdList.Contains(t.Prescription.DrugId));
-                }
-                if (filters.DoctorId != 0)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.Prescription.DoctorId == filters.DoctorId);
-                }
-                if (filters.PharmacyId != 0)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.PharmacyId == filters.PharmacyId);
-                }
-                if (filters.DateFrom.HasValue)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.DateFilled.Value.CompareTo(filters.DateFrom.Value) > 0);
-                }
-                if (filters.DateTo.HasValue)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.DateFilled.Value.CompareTo(filters.DateTo.Value) < 0);
-                }
-                if (filters.CostFrom.HasValue)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.Cost.Value > filters.CostFrom.Value);
-                }
-                if (filters.CostTo.HasValue)
-                {
-                    statisticsQueryable = statisticsQueryable.Where(t => t.Cost.Value < filters.CostTo.Value);
-                }
-            }
-
-            switch (filters.SortBy)
-            {
-                case "DrugName":
-                    if (filters.SortDescending)
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Prescription.Drug.DisplayName);
-                    }
-                    else
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Prescription.Drug.DisplayName);
-                    }
-                    break;
-                case "DoctorName":
-                    if (filters.SortDescending)
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Prescription.Doctor.Name);
-                    }
-                    else
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Prescription.Doctor.Name);
-                    }
-                    break;
-                case "PharmacyName":
-                    if (filters.SortDescending)
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Pharmacy.Name);
-                    }
-                    else
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Pharmacy.Name);
-                    }
-                    break;
-                case "DateFilled":
-                    if (filters.SortDescending)
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.DateFilled);
-                    }
-                    else
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.DateFilled);
-                    }
-                    break;
-                case "Cost":
-                    if (filters.SortDescending)
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderByDescending(t => t.Cost);
-                    }
-                    else
-                    {
-                        statisticsQueryable = statisticsQueryable.OrderBy(t => t.Cost);
-                    }
-                    break;
-            }
+            _totalCost = statisticsQueryable
+                .AsNoTracking()
+                .Select(s => s.Cost)
+                .Sum() ?? 0;
 
             List<Statistic> statistics = statisticsQueryable
                .Select(t => new Statistic
                {
+                   TransactionId = t.TransactionId,
                    DrugName = t.Prescription.Drug.DisplayName,
                    Dosage = t.Prescription.Dosage,
                    DoctorName = t.Prescription.Doctor.Name,
@@ -224,6 +130,5 @@ namespace RxTracker.Controllers
 
             return statistics;
         }
-
     }
 }
