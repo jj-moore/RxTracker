@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RxTracker.ViewModels.Transaction
+namespace RxTracker.ViewModels.Statistics
 {
     public class Statistics
     {

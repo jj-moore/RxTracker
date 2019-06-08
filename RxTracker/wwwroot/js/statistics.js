@@ -14,7 +14,7 @@
 
 function updateStatistics() {
     const data = getFilters();
-    const url = '/Transaction/GetStatisticsJson';
+    const url = '/Statistics/GetStatisticsJson';
 
     fetch(url, {
         method: 'POST',

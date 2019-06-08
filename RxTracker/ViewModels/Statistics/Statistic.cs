@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RxTracker.ViewModels.Transaction
+namespace RxTracker.ViewModels.Statistics
 {
     public class Statistic
     {
